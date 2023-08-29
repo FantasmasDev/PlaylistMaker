@@ -14,8 +14,7 @@ class SettingsAcivity : AppCompatActivity() {
 
         val buttonGoHome = findViewById<ImageButton>(R.id.setting_home_button)
         buttonGoHome.setOnClickListener {
-            val libraryIntent = Intent(this, MainActivity::class.java)
-            startActivity(libraryIntent)
+            finish()
         }
     }
 }
