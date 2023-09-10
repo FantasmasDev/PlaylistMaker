@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/MainScreenActivity">
+    style="@style/MainScreenActivity"
+    android:theme="@style/Main.Screen.Theme">
 
     <TextView
         style="@style/MainScreenHeader"
@@ -17,7 +18,7 @@
             app:icon="@drawable/search"
             app:iconGravity="textStart"
             app:iconPadding="@dimen/main_screen_button_icon_padding"
-            app:iconTint="@color/main_font_black" />
+            app:iconTint="?attr/colorOnSecondary" />
 
         <Button
             android:id="@+id/library_button"
@@ -27,7 +28,7 @@
             app:icon="@drawable/library"
             app:iconGravity="textStart"
             app:iconPadding="@dimen/main_screen_button_icon_padding"
-            app:iconTint="@color/main_font_black" />
+            app:iconTint="?attr/colorOnSecondary" />
 
         <Button
             android:id="@+id/setting_button"
@@ -37,6 +38,6 @@
             app:icon="@drawable/settings"
             app:iconGravity="textStart"
             app:iconPadding="@dimen/main_screen_button_icon_padding"
-            app:iconTint="@color/main_font_black" />
+            app:iconTint="?attr/colorOnSecondary" />
     </LinearLayout>
 </LinearLayout>
