@@ -16,9 +16,10 @@
             android:id="@+id/setting_home_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:background="@color/white"
             android:layout_gravity="start"
+            android:background="@color/white"
+            android:importantForAccessibility="no"
+            android:padding="12dp"
             android:src="@drawable/back_arrow" />
         <TextView
             android:layout_width="0dp"
@@ -72,11 +73,13 @@
             android:text="@string/share_app"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_medium" />
+
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:background="@color/white"
+            android:importantForAccessibility="no"
             android:src="@drawable/share" />
     </LinearLayout>
     <LinearLayout
@@ -95,11 +98,13 @@
             android:text="@string/support_button"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_medium" />
+
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:background="@color/white"
+            android:importantForAccessibility="no"
             android:src="@drawable/support" />
     </LinearLayout>
     <LinearLayout
@@ -118,11 +123,13 @@
             android:text="@string/terms_of_use"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_medium" />
+
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:background="@color/white"
+            android:importantForAccessibility="no"
             android:src="@drawable/arrow_forward" />
     </LinearLayout>
 </LinearLayout>
