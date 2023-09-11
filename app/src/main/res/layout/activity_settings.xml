@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/SettingsScreenActivity">
 
@@ -9,7 +10,8 @@
             android:id="@+id/setting_home_button"
             style="@style/ScreenHeaderButton"
             android:importantForAccessibility="no"
-            android:src="@drawable/back_arrow" />
+            android:src="@drawable/back_arrow"
+            app:tint="?attr/colorOnSecondary" />
 
         <TextView
             style="@style/ScreenHeaderText"

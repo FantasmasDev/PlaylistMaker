@@ -30,9 +30,9 @@
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_marginBottom">@dimen/margin_biggest_dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:backgroundTint">?attr/colorSecondary</item>
+        <item name="android:backgroundTint">?attr/colorPrimaryVariant</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">?attr/colorOnSecondary</item>
+        <item name="android:textColor">?attr/colorOnPrimarySurface</item>
         <item name="android:textSize">@dimen/text_size_big</item>
         <item name="android:fontFamily">@font/ys_display_medium</item>
     </style>
