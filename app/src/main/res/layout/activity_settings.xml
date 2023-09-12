@@ -18,7 +18,9 @@
             android:text="@string/settings_button" />
     </LinearLayout>
 
-    <LinearLayout style="@style/ScreenOption">
+    <LinearLayout style="@style/ScreenOption"
+        android:id="@+id/setting_dark_theme_button">
+
 
         <TextView
             style="@style/ScreenOptionText"
@@ -29,7 +31,8 @@
             tools:ignore="UseSwitchCompatOrMaterialXml" />
     </LinearLayout>
 
-    <LinearLayout style="@style/ScreenOption">
+    <LinearLayout style="@style/ScreenOption"
+        android:id="@+id/sharing_app_button">
 
         <TextView
             style="@style/ScreenOptionText"
@@ -41,7 +44,8 @@
             android:src="@drawable/share" />
     </LinearLayout>
 
-    <LinearLayout style="@style/ScreenOption">
+    <LinearLayout style="@style/ScreenOption"
+        android:id="@+id/support_button">
 
         <TextView
             style="@style/ScreenOptionText"
@@ -53,7 +57,8 @@
             android:src="@drawable/support" />
     </LinearLayout>
 
-    <LinearLayout style="@style/ScreenOption">
+    <LinearLayout style="@style/ScreenOption"
+        android:id="@+id/terms_of_use_button">
 
         <TextView
             style="@style/ScreenOptionText"
