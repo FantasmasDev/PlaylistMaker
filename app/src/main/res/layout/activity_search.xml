@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SearchActivity">
+    style="@style/SettingsScreenActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout style="@style/ScreenHeaderLayout">
+
+        <ImageButton
+            android:id="@+id/search_home_button"
+            style="@style/ScreenHeaderButton"
+            android:importantForAccessibility="no"
+            android:src="@drawable/back_arrow"
+            app:tint="?attr/colorOnSecondary" />
+
+        <TextView
+            style="@style/ScreenHeaderText"
+            android:text="@string/search_menu_button" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/ScreenOption"
+        android:id="@+id/search_bar">
+        <TextView
+            style="@style/ScreenOptionText"
+            android:text="тут должен быть поиск с иконкой" />
+
+        <Switch
+            style="@style/ScreenOptionImage"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+    </LinearLayout>
+
+</LinearLayout>
+

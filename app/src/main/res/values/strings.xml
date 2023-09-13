@@ -4,6 +4,7 @@
     <string name="main_header" translatable="false">Playlist Maker</string>
     <string name="search_button">Поиск</string>
     <string name="settings_button">Настройки</string>
+    <string name="search_menu_button">Поиск</string>
     <string name="library_button">Медиатека</string>
     <string name="dark_theme_switcher">Тёмная тема</string>
     <string name="share_app">Поделиться приложением</string>
