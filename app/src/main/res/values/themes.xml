@@ -7,6 +7,8 @@
         <item name="colorOnPrimarySurface">@color/main_font_black</item>
         <item name="colorSecondary">@color/white</item>
         <item name="colorOnSecondary">@color/main_font_black</item>
+        <item name="colorSurface">@color/braight_gray_background</item>
+        <item name="colorAccent">@color/dark_gray_background</item>
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>

@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="margin_small_dp">4dp</dimen>
-    <dimen name="margin_medium_dp">8dp</dimen>
-    <dimen name="margin_big_dp">12dp</dimen>
-    <dimen name="margin_biggest_dp">16dp</dimen>
+    <dimen name="margin_small_4dp">4dp</dimen>
+    <dimen name="margin_medium_8dp">8dp</dimen>
+    <dimen name="margin_big_12dp">12dp</dimen>
+    <dimen name="margin_biggest_16dp">16dp</dimen>
 
-    <dimen name="padding_small_dp">4dp</dimen>
-    <dimen name="padding_medium_dp">8dp</dimen>
-    <dimen name="padding_big_dp">12dp</dimen>
-    <dimen name="padding_biggest_dp">16dp</dimen>
+    <dimen name="padding_small_4dp">4dp</dimen>
+    <dimen name="padding_medium_8dp">8dp</dimen>
+    <dimen name="padding_big_12dp">12dp</dimen>
+    <dimen name="padding_biggest_16dp">16dp</dimen>
 
-    <dimen name="padding_extra_dp">16dp</dimen>
 
-    <dimen name="text_size_medium">16sp</dimen>
-    <dimen name="text_size_big">22sp</dimen>
+    <dimen name="text_size_medium_16sp">16sp</dimen>
+    <dimen name="text_size_big_22sp">22sp</dimen>
 
-    <dimen name="main_screen_button_icon_padding">8dp</dimen>
-    <dimen name="main_screen_button_round_corner">8dp</dimen>
+    <dimen name="main_screen_button_icon_padding_8dp">8dp</dimen>
+    <dimen name="round_corner_8dp">8dp</dimen>
 </resources>

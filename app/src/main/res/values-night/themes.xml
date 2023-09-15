@@ -7,5 +7,7 @@
         <item name="colorOnPrimarySurface">@color/main_font_black</item>
         <item name="colorSecondary">@color/main_background_black</item>
         <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorAccent">@color/black</item>
     </style>
 </resources>

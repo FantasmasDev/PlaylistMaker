@@ -18,16 +18,14 @@
             android:text="@string/search_menu_button" />
     </LinearLayout>
 
-    <LinearLayout style="@style/ScreenOption"
-        android:id="@+id/search_bar">
-        <TextView
-            style="@style/ScreenOptionText"
-            android:text="тут должен быть поиск с иконкой" />
-
-        <Switch
-            style="@style/ScreenOptionImage"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
-    </LinearLayout>
+    <EditText
+        android:id="@+id/search_bar"
+        style="@style/SearchBar"
+        android:drawableStart="@drawable/search_icon"
+        android:hint="@string/search_menu_button"
+        android:importantForAutofill="no"
+        app:cornerRadius="@dimen/round_corner_8dp"
+        tools:ignore="RtlSymmetry" />
 
 </LinearLayout>
 

@@ -14,30 +14,30 @@
             android:id="@+id/search_button"
             style="@style/MainScreenButton"
             android:text="@string/search_button"
-            app:cornerRadius="@dimen/main_screen_button_round_corner"
+            app:cornerRadius="@dimen/round_corner_8dp"
             app:icon="@drawable/search"
             app:iconGravity="textStart"
-            app:iconPadding="@dimen/main_screen_button_icon_padding"
+            app:iconPadding="@dimen/main_screen_button_icon_padding_8dp"
             app:iconTint="?attr/colorOnPrimarySurface" />
 
         <Button
             android:id="@+id/library_button"
             style="@style/MainScreenButton"
             android:text="@string/library_button"
-            app:cornerRadius="@dimen/main_screen_button_round_corner"
+            app:cornerRadius="@dimen/round_corner_8dp"
             app:icon="@drawable/library"
             app:iconGravity="textStart"
-            app:iconPadding="@dimen/main_screen_button_icon_padding"
+            app:iconPadding="@dimen/main_screen_button_icon_padding_8dp"
             app:iconTint="?attr/colorOnPrimarySurface" />
 
         <Button
             android:id="@+id/setting_button"
             style="@style/MainScreenButton"
             android:text="@string/settings_button"
-            app:cornerRadius="@dimen/main_screen_button_round_corner"
+            app:cornerRadius="@dimen/round_corner_8dp"
             app:icon="@drawable/settings"
             app:iconGravity="textStart"
-            app:iconPadding="@dimen/main_screen_button_icon_padding"
+            app:iconPadding="@dimen/main_screen_button_icon_padding_8dp"
             app:iconTint="?attr/colorOnPrimarySurface" />
     </LinearLayout>
 </LinearLayout>
