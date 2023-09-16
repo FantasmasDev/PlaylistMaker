@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import com.example.playlistmaker.databinding.ActivitySearchBinding
 
 class SearchActivity : AppCompatActivity() {
@@ -15,6 +16,11 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+//        if (savedInstanceState != null) {
+//            binding.searchBar.setText(savedInstanceState.getString("USER_INPUT"))
+//            Toast.makeText(this@SearchActivity, "Здесь какой-то текст", Toast.LENGTH_SHORT).show()
+//        }
 
         binding.searchHomeButton.setOnClickListener {
             finish()
@@ -28,19 +34,32 @@ class SearchActivity : AppCompatActivity() {
 
         val simpleTextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // empty
+
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
                 binding.clearButton.visibility = clearButtonVisibility(s)
             }
 
             override fun afterTextChanged(s: Editable?) {
-                // empty
+
             }
         }
         binding.searchBar.addTextChangedListener(simpleTextWatcher)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("USER_INPUT", binding.searchBar.text.toString())
+        val text = binding.searchBar.text.toString()
+        Toast.makeText(this@SearchActivity, text, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        // binding.searchBar.setText()
+        val text = savedInstanceState.getString("USER_INPUT")
+        Toast.makeText(this@SearchActivity, text + "2", Toast.LENGTH_SHORT).show()
     }
 
     private fun clearButtonVisibility(s: CharSequence?): Int {
