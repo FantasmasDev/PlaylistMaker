@@ -17,11 +17,6 @@ class SearchActivity : AppCompatActivity() {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        if (savedInstanceState != null) {
-//            binding.searchBar.setText(savedInstanceState.getString("USER_INPUT"))
-//            Toast.makeText(this@SearchActivity, "Здесь какой-то текст", Toast.LENGTH_SHORT).show()
-//        }
-
         binding.searchHomeButton.setOnClickListener {
             finish()
         }
@@ -53,7 +48,6 @@ class SearchActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
         outState.putString("USER_INPUT", binding.searchBar.text.toString())
         lastSearchRequest = binding.searchBar.text.toString()
-//        Toast.makeText(this@SearchActivity, text, Toast.LENGTH_SHORT).show()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
