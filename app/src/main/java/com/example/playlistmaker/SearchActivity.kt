@@ -7,11 +7,11 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import com.example.playlistmaker.databinding.ActivitySearchBinding
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
+    private lateinit var lastSearchRequest: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
@@ -28,7 +28,8 @@ class SearchActivity : AppCompatActivity() {
 
         binding.clearButton.setOnClickListener {
             binding.searchBar.setText("")
-            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val inputMethodManager =
+                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(binding.searchBar.windowToken, 0)
         }
 
@@ -51,15 +52,15 @@ class SearchActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString("USER_INPUT", binding.searchBar.text.toString())
-        val text = binding.searchBar.text.toString()
-        Toast.makeText(this@SearchActivity, text, Toast.LENGTH_SHORT).show()
+        lastSearchRequest = binding.searchBar.text.toString()
+//        Toast.makeText(this@SearchActivity, text, Toast.LENGTH_SHORT).show()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        // binding.searchBar.setText()
-        val text = savedInstanceState.getString("USER_INPUT")
-        Toast.makeText(this@SearchActivity, text + "2", Toast.LENGTH_SHORT).show()
+
+        lastSearchRequest = savedInstanceState.getString("USER_INPUT").toString()
+        binding.searchBar.setText(lastSearchRequest)
     }
 
     private fun clearButtonVisibility(s: CharSequence?): Int {

@@ -22,29 +22,34 @@ class SettingsAcivity : AppCompatActivity() {
             shareIntent.type = "text/plain"
             shareIntent.putExtra(
                 Intent.EXTRA_TEXT,
-                "https://practicum.yandex.ru/android-developer/?from=catalog"
+                getString(R.string.link)
             )
-            startActivity(Intent.createChooser(shareIntent, "Поделиться приложением"))
+            startActivity(
+                Intent.createChooser(
+                    shareIntent,
+                    getString(R.string.share_app_link)
+                )
+            )
         }
 
         binding.supportButton.setOnClickListener {
             val supportIntent = Intent(Intent.ACTION_SENDTO)
             supportIntent.data = Uri.parse("mailto:")
-            supportIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("fragofikus@gmail.com"))
+            supportIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.dev_mail)))
             supportIntent.putExtra(
                 Intent.EXTRA_SUBJECT,
-                "Сообщение разработчикам и разработчицам приложения Playlist Maker"
+                getString(R.string.mail_theme)
             )
             supportIntent.putExtra(
                 Intent.EXTRA_TEXT,
-                "Спасибо разработчикам и разработчицам за крутое приложение!"
+                getString(R.string.mail_content)
             )
             startActivity(supportIntent)
         }
 
         binding.termsOfUseButton.setOnClickListener {
             val termsIntent =
-                Intent(Intent.ACTION_VIEW, Uri.parse("https://yandex.ru/legal/practicum_offer/"))
+                Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.terms_link)))
             startActivity(termsIntent)
         }
     }
