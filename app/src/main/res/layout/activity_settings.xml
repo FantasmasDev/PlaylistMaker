@@ -25,7 +25,9 @@
 
         <TextView
             style="@style/ScreenOptionText"
-            android:text="@string/dark_theme_switcher" />
+            android:text="@string/dark_theme_switcher"
+            android:baselineAligned="false"
+            android:gravity="fill"/>
 
         <Switch
             style="@style/ScreenOptionImage"

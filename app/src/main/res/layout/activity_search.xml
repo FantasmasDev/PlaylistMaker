@@ -18,25 +18,6 @@
             android:text="@string/search_menu_button" />
     </LinearLayout>
 
-    <!--    <LinearLayout style="@style/SearchBarLayout">-->
-
-    <!--        <EditText-->
-    <!--            android:id="@+id/search_bar"-->
-    <!--            style="@style/SearchBar"-->
-    <!--            android:drawableStart="@drawable/search_icon"-->
-    <!--            android:hint="@string/search_menu_button"-->
-    <!--            android:importantForAutofill="no"-->
-    <!--            tools:ignore="RtlSymmetry" />-->
-
-    <!--        <ImageButton-->
-    <!--            android:id="@+id/clear_button"-->
-    <!--            style="@style/ClearButton"-->
-    <!--            android:importantForAccessibility="no"-->
-    <!--            android:src="@drawable/clear_button_cross"-->
-    <!--            android:visibility="gone"-->
-    <!--            app:tint="?attr/colorAccent" />-->
-    <!--    </LinearLayout>-->
-
     <FrameLayout style="@style/SearchBarLayout">
 
         <EditText
@@ -55,6 +36,13 @@
             android:visibility="gone"
             app:tint="?attr/colorAccent" />
     </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/track_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_biggest_16dp"/>
+
 
 </LinearLayout>
 
