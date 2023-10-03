@@ -11,7 +11,7 @@
             style="@style/ScreenHeaderButton"
             android:importantForAccessibility="no"
             android:src="@drawable/back_arrow"
-            app:tint="?attr/colorOnSecondary" />
+            app:tint="?attr/colorOnPrimary" />
 
         <TextView
             style="@style/ScreenHeaderText"

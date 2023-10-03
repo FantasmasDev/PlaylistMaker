@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val trackNameView: TextView
@@ -26,6 +27,9 @@ class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         trackTimeView.text = track.trackTime
         Glide.with(itemView)
             .load(track.artworkUrl100)
+            .placeholder(R.drawable.empty_album_pic)
+            .fitCenter()
+            .transform(RoundedCorners(2))
             .into(albumPicView)
     }
 }

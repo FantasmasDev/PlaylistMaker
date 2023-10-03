@@ -18,7 +18,7 @@
             app:icon="@drawable/search"
             app:iconGravity="textStart"
             app:iconPadding="@dimen/main_screen_button_icon_padding_8dp"
-            app:iconTint="?attr/colorOnPrimarySurface" />
+            app:iconTint="?attr/colorOnSurface" />
 
         <Button
             android:id="@+id/library_button"
@@ -28,7 +28,7 @@
             app:icon="@drawable/library"
             app:iconGravity="textStart"
             app:iconPadding="@dimen/main_screen_button_icon_padding_8dp"
-            app:iconTint="?attr/colorOnPrimarySurface" />
+            app:iconTint="?attr/colorOnSurface" />
 
         <Button
             android:id="@+id/setting_button"
@@ -38,6 +38,6 @@
             app:icon="@drawable/settings"
             app:iconGravity="textStart"
             app:iconPadding="@dimen/main_screen_button_icon_padding_8dp"
-            app:iconTint="?attr/colorOnPrimarySurface" />
+            app:iconTint="?attr/colorOnSurface" />
     </LinearLayout>
 </LinearLayout>

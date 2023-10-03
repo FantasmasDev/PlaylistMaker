@@ -11,7 +11,7 @@
             style="@style/ScreenHeaderButton"
             android:importantForAccessibility="no"
             android:src="@drawable/back_arrow"
-            app:tint="?attr/colorOnSecondary" />
+            app:tint="?attr/colorOnPrimary" />
 
         <TextView
             style="@style/ScreenHeaderText"
@@ -34,7 +34,7 @@
             android:importantForAccessibility="no"
             android:src="@drawable/clear_button_cross"
             android:visibility="gone"
-            app:tint="?attr/colorAccent" />
+            app:tint="?attr/colorPrimaryVariant" />
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
