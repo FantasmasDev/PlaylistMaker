@@ -41,8 +41,6 @@
         android:id="@+id/track_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/margin_biggest_16dp"/>
-
+        android:layout_marginTop="@dimen/margin_biggest_16dp" />
 
 </LinearLayout>
-
