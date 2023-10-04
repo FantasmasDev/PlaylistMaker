@@ -8,14 +8,16 @@
     <ImageView
         android:id="@+id/album_pic"
         style="@style/TrackAlbum"
-        android:importantForAccessibility="no" />
+        android:importantForAccessibility="no"
+        tools:src="@drawable/empty_album_pic"/>
 
     <LinearLayout style="@style/TrackTextList">
 
         <TextView
             android:id="@+id/track_name"
             style="@style/TrackNameText"
-            tools:ignore="NestedWeights" />
+            tools:ignore="NestedWeights"
+            tools:text="Track Name"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,7 +26,8 @@
 
             <TextView
                 android:id="@+id/artist_name"
-                style="@style/TrackArtistName" />
+                style="@style/TrackArtistName"
+                tools:text="Artist Name"/>
 
             <ImageView
                 style="@style/TrackSeparator"
@@ -34,7 +37,8 @@
 
             <TextView
                 android:id="@+id/track_time"
-                style="@style/TrackTime" />
+                style="@style/TrackTime"
+                tools:text="Track time"/>
         </LinearLayout>
     </LinearLayout>
 
