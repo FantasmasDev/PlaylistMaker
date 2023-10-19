@@ -16,4 +16,9 @@
     <string name="mail_theme" translatable="false">Сообщение разработчикам и разработчицам приложения Playlist Maker</string>
     <string name="mail_content" translatable="false">Спасибо разработчикам и разработчицам за крутое приложение!</string>
     <string name="terms_link" translatable="false">https://yandex.ru/legal/practicum_offer/</string>
+
+<!--   Строки PlaceHolder-->
+    <string name="nothing_found">Ничего не найдено</string>
+    <string name="something_went_wrong">Что-то пошло не так</string>
+
 </resources>

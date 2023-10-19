@@ -25,7 +25,7 @@ class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(track: Track) {
         trackNameView.text = track.trackName
         artistNameView.text = track.artistName
-        trackTimeView.text = track.trackTime
+        trackTimeView.text = track.trackTimeMillis
         val cornerRadiusDP = 2F
         Glide.with(itemView)
             .load(track.artworkUrl100)
@@ -39,6 +39,7 @@ class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
             dp,
-            context.resources.displayMetrics).toInt()
+            context.resources.displayMetrics
+        ).toInt()
     }
 }

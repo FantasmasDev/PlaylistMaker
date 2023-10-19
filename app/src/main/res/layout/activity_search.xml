@@ -25,7 +25,9 @@
             style="@style/SearchBar"
             android:drawableStart="@drawable/search_icon"
             android:hint="@string/search_menu_button"
+            android:imeOptions="actionDone"
             android:importantForAutofill="no"
+            android:singleLine="true"
             tools:ignore="RtlSymmetry" />
 
         <ImageButton
