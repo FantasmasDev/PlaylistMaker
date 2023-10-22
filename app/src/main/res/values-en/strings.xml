@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_button">Search</string>
+    <string name="library_button">Library</string>
+    <string name="settings_button">Settings</string>
+    <string name="dark_theme_switcher">Dark theme</string>
+    <string name="share_app">Share app</string>
+    <string name="support_button">Write to support</string>
+    <string name="terms_of_use">Terms of use</string>
+    <string name="search_menu_button">Search</string>
+    <string name="nothing_found">nothing found</string>
+    <string name="place_holder_button">Update</string>
+</resources>
