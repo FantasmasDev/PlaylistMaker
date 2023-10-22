@@ -18,7 +18,8 @@
     <string name="terms_link" translatable="false">https://yandex.ru/legal/practicum_offer/</string>
 
 <!--   Строки PlaceHolder-->
-    <string name="nothing_found">Ничего не найдено</string>
-    <string name="something_went_wrong">Что-то пошло не так</string>
+    <string name="nothing_found">Ничего не нашлось</string>
+    <string name="something_went" translatable="false">Проблемы со связью \n \n Загрузка не удалась. Проверьте подключение к интернету</string>
+    <string name="place_holder_button">Обновить</string>
 
 </resources>
