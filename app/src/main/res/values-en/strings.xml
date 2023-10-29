@@ -8,4 +8,6 @@
     <string name="support_button">Write to support</string>
     <string name="terms_of_use">Terms of use</string>
     <string name="search_menu_button">Search</string>
+    <string name="nothing_found">nothing found</string>
+    <string name="place_holder_button">Update</string>
 </resources>

@@ -11,7 +11,7 @@
             style="@style/ScreenHeaderButton"
             android:importantForAccessibility="no"
             android:src="@drawable/back_arrow"
-            app:tint="?attr/colorOnSecondary" />
+            app:tint="?attr/colorOnPrimary" />
 
         <TextView
             style="@style/ScreenHeaderText"
@@ -25,7 +25,9 @@
             style="@style/SearchBar"
             android:drawableStart="@drawable/search_icon"
             android:hint="@string/search_menu_button"
+            android:imeOptions="actionDone"
             android:importantForAutofill="no"
+            android:singleLine="true"
             tools:ignore="RtlSymmetry" />
 
         <ImageButton
@@ -34,13 +36,45 @@
             android:importantForAccessibility="no"
             android:src="@drawable/clear_button_cross"
             android:visibility="gone"
-            app:tint="?attr/colorAccent" />
+            app:tint="?attr/colorPrimaryVariant" />
     </FrameLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/track_list"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/margin_biggest_16dp" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/track_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_biggest_16dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/placeholder_image"
+                tools:src="?attr/placeholder_image_error"
+                style="@style/placeholder_image" />
+
+            <TextView
+                android:id="@+id/placeholder_text"
+                tools:text="@string/something_went"
+                style="@style/placeholder_text" />
+
+            <Button
+                android:id="@+id/placeholder_button"
+                android:text="@string/place_holder_button"
+                tools:visibility="visible"
+
+                style="@style/placeholder_button" />
+        </LinearLayout>
+
+
+    </FrameLayout>
+
 
 </LinearLayout>
