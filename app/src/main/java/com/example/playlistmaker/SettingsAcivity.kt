@@ -1,17 +1,37 @@
 package com.example.playlistmaker
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Switch
 import com.example.playlistmaker.databinding.ActivitySettingsBinding
 
 class SettingsAcivity : AppCompatActivity() {
+    private lateinit var sharedPreferences: SharedPreferences
+    val userPreferences = UserPreferences()
+
     private lateinit var binding: ActivitySettingsBinding
+
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    private lateinit var themeSwitcher: Switch
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        sharedPreferences = getSharedPreferences(USER_PREFERENCES, MODE_PRIVATE)
+
+        themeSwitcher = binding.themeSwitcher
+
+        if(userPreferences.readSwitchState(sharedPreferences)) {
+            themeSwitcher.isChecked = true
+        }
+
+        themeSwitcher.setOnCheckedChangeListener { switcher, checked -> (applicationContext as App).switcherTheme(checked)}
 
         binding.settingHomeButton.setOnClickListener {
             finish()
@@ -52,5 +72,11 @@ class SettingsAcivity : AppCompatActivity() {
                 Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.terms_link)))
             startActivity(termsIntent)
         }
+    }
+
+    override fun onStop() {
+        val switchState = themeSwitcher.isChecked
+        userPreferences.writeTheme(sharedPreferences, switchState)
+        super.onStop()
     }
 }
