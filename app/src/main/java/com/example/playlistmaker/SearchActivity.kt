@@ -101,11 +101,6 @@ class SearchActivity : AppCompatActivity() {
         //Чтение истории
         sharedPreferences = getSharedPreferences(USER_PREFERENCES, MODE_PRIVATE)
 
-        if(userPreferences.readHistory(sharedPreferences).isNotEmpty()){
-            SearchHistory.setHistory(userPreferences.readHistory(sharedPreferences))
-            historyPlaceHolder.visibility = View.VISIBLE
-        }
-
 
         trackAdapter.tracks = trackList
         historyTrackAdapter.tracks = SearchHistory.getHistory()
@@ -124,7 +119,8 @@ class SearchActivity : AppCompatActivity() {
             placeholderText.text = null
             placeholderButton.visibility = View.GONE
 
-            if(SearchHistory.getHistory().isNotEmpty())historyPlaceHolder.visibility = View.VISIBLE
+            historyPlaceHolder.visibility =
+                if (SearchHistory.getHistory().isNotEmpty()) View.VISIBLE else View.GONE
 
             val inputMethodManager =
                 getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -153,6 +149,13 @@ class SearchActivity : AppCompatActivity() {
                 clearButton.visibility = clearButtonVisibility(s)
                 searchBarHint.visibility =
                     if (searchBar.hasFocus() && s?.isEmpty() == true) View.VISIBLE else View.GONE
+
+                if (searchBar.hasFocus() && s?.isEmpty() == true && SearchHistory.getHistory()
+                        .isNotEmpty()
+                ) {
+                    historyPlaceHolder.visibility = View.VISIBLE
+                    clearList()
+                } else View.GONE
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -163,7 +166,6 @@ class SearchActivity : AppCompatActivity() {
         searchBar.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 search()
-                historyPlaceHolder.visibility = View.GONE
                 true
             }
             false
@@ -173,16 +175,23 @@ class SearchActivity : AppCompatActivity() {
         searchBar.setOnFocusChangeListener { view, hasFocus ->
             searchBarHint.visibility =
                 if (hasFocus && searchBar.text.isEmpty()) View.VISIBLE else View.GONE
+
+            historyPlaceHolder.visibility =
+                if (hasFocus && searchBar.text.toString().isEmpty() && SearchHistory.getHistory()
+                        .isNotEmpty()
+                ) View.VISIBLE else View.GONE
         }
 
         //настраиваем ресайклер
         recycler.apply {
-            layoutManager = LinearLayoutManager(this@SearchActivity, LinearLayoutManager.VERTICAL, false)
+            layoutManager =
+                LinearLayoutManager(this@SearchActivity, LinearLayoutManager.VERTICAL, false)
             adapter = trackAdapter
         }
 
         historyRecycler.apply {
-            layoutManager = LinearLayoutManager(this@SearchActivity, LinearLayoutManager.VERTICAL, false)
+            layoutManager =
+                LinearLayoutManager(this@SearchActivity, LinearLayoutManager.VERTICAL, false)
             adapter = historyTrackAdapter
         }
     }
@@ -250,6 +259,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun search() {
         if (searchBar.text.isNotEmpty()) {
+            historyPlaceHolder.visibility = View.GONE
             itunesService.search(searchBar.text.toString())
                 .enqueue(object : Callback<TracksResponse> {
                     @SuppressLint("NotifyDataSetChanged")

@@ -15,7 +15,6 @@ class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val artistNameView: TextView
     private val trackTimeView: TextView
     private val albumPicView: ImageView
-    private val trackButton: ImageView
 
 
     init {
@@ -23,11 +22,10 @@ class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         artistNameView = itemView.findViewById(R.id.artist_name)
         trackTimeView = itemView.findViewById(R.id.track_time)
         albumPicView = itemView.findViewById(R.id.album_pic)
-        trackButton = itemView.findViewById(R.id.track_action_button)
     }
 
     fun bind(track: Track, clickListener: TrackAdapter.TrackClickListener) {
-        trackButton.setOnClickListener { clickListener.onTrackClick(track) }
+        itemView.setOnClickListener { clickListener.onTrackClick(track) }
         trackNameView.text = track.trackName
         artistNameView.text = track.artistName
         trackTimeView.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis.toLong())
@@ -38,10 +36,6 @@ class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .fitCenter()
             .transform(RoundedCorners(dpToPx(cornerRadiusDP, itemView)))
             .into(albumPicView)
-
-//        trackButton.setOnClickListener {
-//            SearchHistory.add(track)
-//        }
     }
 
     fun dpToPx(dp: Float, context: View): Int {

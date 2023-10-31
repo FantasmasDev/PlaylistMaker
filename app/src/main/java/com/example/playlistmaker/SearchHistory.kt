@@ -14,10 +14,8 @@ object SearchHistory {
     }
 
     fun add(track: Track) {
-        if(historyTrackList.contains(track)){
-            historyTrackList.remove(track)
-        }
-        historyTrackList.add(track)
+        historyTrackList.remove(track)
+        historyTrackList.add(0, track)
     }
 
     fun clean() {
