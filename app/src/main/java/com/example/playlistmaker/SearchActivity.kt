@@ -101,6 +101,9 @@ class SearchActivity : AppCompatActivity() {
         //Чтение истории
         sharedPreferences = getSharedPreferences(USER_PREFERENCES, MODE_PRIVATE)
 
+        if (userPreferences.readHistory(sharedPreferences).isNotEmpty()) {
+            SearchHistory.setHistory(userPreferences.readHistory(sharedPreferences))
+        }
 
         trackAdapter.tracks = trackList
         historyTrackAdapter.tracks = SearchHistory.getHistory()
@@ -155,7 +158,9 @@ class SearchActivity : AppCompatActivity() {
                 ) {
                     historyPlaceHolder.visibility = View.VISIBLE
                     clearList()
-                } else View.GONE
+                } else {
+                    historyPlaceHolder.visibility = View.GONE
+                }
             }
 
             override fun afterTextChanged(s: Editable?) {

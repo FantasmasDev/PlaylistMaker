@@ -8,10 +8,7 @@ class UserPreferences {
     fun readHistory(sharedPreferences: SharedPreferences): ArrayList<Track> {
         val json = sharedPreferences.getString(TRACKS_HISTORY, null) ?: return ArrayList<Track>()
         val list = Gson().fromJson(json, Array<Track>::class.java)
-        val arrayList: ArrayList<Track> = ArrayList<Track>().apply {
-            addAll(list)
-        }
-        return arrayList
+        return list.toCollection(ArrayList<Track>())
     }
 
     fun readSwitchState(sharedPreferences: SharedPreferences): Boolean {
