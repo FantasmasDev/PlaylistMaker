@@ -2,6 +2,7 @@ package com.example.playlistmaker
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -66,11 +67,13 @@ class SearchActivity : AppCompatActivity() {
     private val trackList = ArrayList<Track>()
 
     private val trackAdapter = TrackAdapter {
-        addTrackToHistory(it)
+        openPlayer(it)
+        //addTrackToHistory(it)
     }
 
     private val historyTrackAdapter = TrackAdapter {
-        removeTrackFromHistory(it)
+        openPlayer(it)
+        //removeTrackFromHistory(it)
     }
 
     //сохраняем ввод
@@ -97,6 +100,7 @@ class SearchActivity : AppCompatActivity() {
 
         val goHomeButton = binding.searchHomeButton
         val clearButton = binding.clearButton
+
 
         //Чтение истории
         sharedPreferences = getSharedPreferences(USER_PREFERENCES, MODE_PRIVATE)
@@ -214,7 +218,14 @@ class SearchActivity : AppCompatActivity() {
         lastSearchRequest = binding.searchBar.text.toString()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onRestart() {
+        super.onRestart()
+        historyTrackAdapter.notifyDataSetChanged()
+    }
+
     //вспоминаем данные
+    @SuppressLint("NotifyDataSetChanged")
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         lastSearchRequest = savedInstanceState.getString("USER_INPUT").toString()
@@ -299,15 +310,9 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    private fun addTrackToHistory(track: Track) {
-        SearchHistory.add(track)
-        historyTrackAdapter.notifyDataSetChanged()
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun removeTrackFromHistory(track: Track) {
-        SearchHistory.remove(track)
-        historyTrackAdapter.notifyDataSetChanged()
+    private fun openPlayer(track: Track) {
+        val playerIntent = Intent(this, PlayerActivity::class.java)
+        playerIntent.putExtra("track", track)
+        startActivity(playerIntent)
     }
 }
