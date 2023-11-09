@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/TrackPlate"
+
     tools:ignore="RtlSymmetry">
 
     <ImageView
@@ -43,6 +44,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/track_action_button"
         style="@style/TrackActionButton"
         android:importantForAccessibility="no"
         android:src="@drawable/arrow_forward"

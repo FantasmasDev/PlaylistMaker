@@ -24,7 +24,8 @@ class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         albumPicView = itemView.findViewById(R.id.album_pic)
     }
 
-    fun bind(track: Track) {
+    fun bind(track: Track, clickListener: TrackAdapter.TrackClickListener) {
+        itemView.setOnClickListener { clickListener.onTrackClick(track) }
         trackNameView.text = track.trackName
         artistNameView.text = track.artistName
         trackTimeView.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis.toLong())
