@@ -14,7 +14,9 @@ import java.util.Locale
 
 class PlayerActivity : AppCompatActivity() {
     private lateinit var binding: PlayerLayoutBinding
+
     private lateinit var track: Track
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = PlayerLayoutBinding.inflate(layoutInflater)
@@ -31,12 +33,12 @@ class PlayerActivity : AppCompatActivity() {
         val genre = binding.ganreInfo
         val country = binding.countryInfo
 
-        val menuButton = binding.menuButton
+        val returnButton = binding.menuButton
         val addLibrary = binding.playerAddButton
 
         track = intent.getParcelableExtra("track")!!
 
-        menuButton.setOnClickListener { finish() }
+        returnButton.setOnClickListener { finish() }
         addLibrary.setOnClickListener { addTrackToHistory(track) }
 
         trackName.text = track.trackName

@@ -68,12 +68,10 @@ class SearchActivity : AppCompatActivity() {
 
     private val trackAdapter = TrackAdapter {
         openPlayer(it)
-        //addTrackToHistory(it)
     }
 
     private val historyTrackAdapter = TrackAdapter {
         openPlayer(it)
-        //removeTrackFromHistory(it)
     }
 
     //сохраняем ввод
@@ -310,9 +308,12 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun openPlayer(track: Track) {
+        SearchHistory.add(track)
         val playerIntent = Intent(this, PlayerActivity::class.java)
         playerIntent.putExtra("track", track)
         startActivity(playerIntent)
+        historyTrackAdapter.notifyDataSetChanged()
     }
 }

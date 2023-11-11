@@ -112,8 +112,9 @@
         <item name="android:drawablePadding">10dp</item>
         <item name="android:paddingStart">@dimen/padding_big_12dp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">36dp</item>
         <item name="android:minHeight">36dp</item>
+        <item name="android:maxHeight">36dp</item>
         <item name="android:maxLines">1</item>
         <item name="android:fontFamily">@font/ys_display_regular</item>
         <item name="android:backgroundTint">?attr/colorSurface</item>
@@ -124,8 +125,8 @@
     </style>
 
     <style name="ClearButton">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
         <item name="android:backgroundTint">?attr/colorSurface</item>
         <item name="android:layout_gravity">end</item>
     </style>
