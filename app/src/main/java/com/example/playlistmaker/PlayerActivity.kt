@@ -22,54 +22,41 @@ class PlayerActivity : AppCompatActivity() {
         binding = PlayerLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val trackName = binding.playerTrackName
-        val artistName = binding.playerArtistName
-        val trackDuration = binding.durationInfo
-        val albumCover = binding.playerCover
-
-        val album = binding.albumInfo
-        val albumText = binding.albumText
-        val releaseDate = binding.yearInfo
-        val genre = binding.ganreInfo
-        val country = binding.countryInfo
-
-        val returnButton = binding.menuButton
-        val addLibrary = binding.playerAddButton
-
         track = intent.getParcelableExtra("track")!!
 
-        returnButton.setOnClickListener { finish() }
-        addLibrary.setOnClickListener { addTrackToHistory(track) }
+        binding.apply {
+            playerTrackName.text = track.trackName
+            playerArtistName.text = track.artistName
 
-        trackName.text = track.trackName
-        artistName.text = track.artistName
+            durationInfo.text = SimpleDateFormat(
+                "mm:ss",
+                Locale.getDefault()
+            ).format(track.trackTimeMillis.toLong())
 
-        trackDuration.text = SimpleDateFormat(
-            "mm:ss",
-            Locale.getDefault()
-        ).format(track.trackTimeMillis.toLong())
+            Glide.with(playerCover)
+                .load(track.artworkUrl100.replaceAfterLast('/', "512x512bb.jpg"))
+                .placeholder(R.drawable.empty_album_pic)
+                .transform(CenterCrop(), RoundedCorners(dpToPx(8F, playerCover)))
+                .into(playerCover)
 
-        if (track.collectionName.isNotEmpty()) {
-            album.text = track.collectionName
-        } else {
-            album.isVisible = false
-            albumText.isVisible = false
+            yearInfo.text = track.releaseDate.substring(0, 4)
+            ganreInfo.text = track.primaryGenreName
+            countryInfo.text = track.country
+
+            if (track.collectionName.isNotEmpty()) {
+                albumInfo.text = track.collectionName
+            } else {
+                albumInfo.isVisible = false
+                albumText.isVisible = false
+            }
+
+            menuButton.setOnClickListener { finish() }
+            playerAddButton.setOnClickListener { addTrackToHistory(track) }
         }
-
-        releaseDate.text = track.releaseDate.substring(0, 4)
-        genre.text = track.primaryGenreName
-        country.text = track.country
-
-        Glide.with(albumCover)
-            .load(track.artworkUrl100.replaceAfterLast('/', "512x512bb.jpg"))
-            .placeholder(R.drawable.empty_album_pic)
-            .transform(CenterCrop(), RoundedCorners(dpToPx(8F, albumCover)))
-            .into(albumCover)
     }
 
     fun addTrackToHistory(track: Track) {
         SearchHistory.add(track)
-
     }
 
     fun dpToPx(dp: Float, context: View): Int {

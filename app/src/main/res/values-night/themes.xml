@@ -6,20 +6,13 @@
 
         <item name="colorSurface">@color/white</item>
         <item name="colorOnSurface">@color/main_font_black</item>
-        <!--        <item name="colorPrimary">@color/main_background_black</item>-->
-        <!--        <item name="colorOnPrimary">@color/white</item>-->
-        <!--        <item name="colorPrimaryVariant">@color/white</item>-->
-        <!--        <item name="colorOnPrimarySurface">@color/main_font_black</item>-->
-        <!--        <item name="colorSecondary">@color/main_background_black</item>-->
-        <!--        <item name="colorOnSecondary">@color/white</item>-->
-        <!--        <item name="colorSurface">@color/white</item>-->
-        <!--        <item name="colorAccent">@color/black</item>-->
     </style>
 
     <style name="Second.Screen.Theme" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/main_background_black</item>
         <item name="colorOnPrimary">@color/white</item>
-
+        <item name="add_button">@drawable/add_button_night</item>
+        <item name="like_button">@drawable/like_button_night</item>
     </style>
 
     <style name="Search.Screen.Theme" parent="Second.Screen.Theme">

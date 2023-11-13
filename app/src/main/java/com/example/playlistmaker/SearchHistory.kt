@@ -1,7 +1,5 @@
 package com.example.playlistmaker
 
-import android.content.SharedPreferences
-
 object SearchHistory {
     private var historyTrackList = ArrayList<Track>()
 

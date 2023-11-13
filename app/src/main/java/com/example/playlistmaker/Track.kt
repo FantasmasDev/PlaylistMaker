@@ -2,7 +2,6 @@ package com.example.playlistmaker
 
 import android.os.Parcel
 import android.os.Parcelable
-
 data class Track(
     val trackName: String,
     val artistName: String,

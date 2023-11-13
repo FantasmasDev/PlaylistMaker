@@ -56,7 +56,6 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
 
     private lateinit var searchBar: EditText
-    private lateinit var searchBarHint: TextView
     private lateinit var placeholderImage: ImageView
     private lateinit var placeholderText: TextView
     private lateinit var placeholderButton: Button
@@ -85,7 +84,6 @@ class SearchActivity : AppCompatActivity() {
 
         //инициализация кнопок
         searchBar = binding.searchBar
-        searchBarHint = binding.searchBarHint
         placeholderImage = binding.placeholderImage
         placeholderText = binding.placeholderText
         placeholderButton = binding.placeholderButton
@@ -152,8 +150,6 @@ class SearchActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 clearButton.visibility = clearButtonVisibility(s)
-                searchBarHint.visibility =
-                    if (searchBar.hasFocus() && s?.isEmpty() == true) View.VISIBLE else View.GONE
 
                 if (searchBar.hasFocus() && s?.isEmpty() == true && SearchHistory.getHistory()
                         .isNotEmpty()
@@ -180,8 +176,6 @@ class SearchActivity : AppCompatActivity() {
 
         //Обработка вывода подсказки
         searchBar.setOnFocusChangeListener { view, hasFocus ->
-            searchBarHint.visibility =
-                if (hasFocus && searchBar.text.isEmpty()) View.VISIBLE else View.GONE
 
             historyPlaceHolder.visibility =
                 if (hasFocus && searchBar.text.toString().isEmpty() && SearchHistory.getHistory()

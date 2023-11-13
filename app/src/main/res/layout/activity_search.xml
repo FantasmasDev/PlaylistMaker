@@ -43,19 +43,6 @@
                 android:visibility="gone"
                 app:tint="?attr/colorPrimaryVariant" />
         </FrameLayout>
-
-        <TextView
-            android:id="@+id/search_bar_hint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:background="@color/white"
-            android:padding="16dp"
-            android:text="Введите название песни"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:visibility="gone" />
     </LinearLayout>
 
     <FrameLayout
