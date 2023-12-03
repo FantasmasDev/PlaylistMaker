@@ -17,9 +17,15 @@
     <string name="mail_content" translatable="false">Спасибо разработчикам и разработчицам за крутое приложение!</string>
     <string name="terms_link" translatable="false">https://yandex.ru/legal/practicum_offer/</string>
 
-<!--   Строки PlaceHolder-->
+    <!--   Строки PlaceHolder-->
     <string name="nothing_found">Ничего не нашлось</string>
     <string name="something_went" translatable="false">Проблемы со связью \n \n Загрузка не удалась. Проверьте подключение к интернету</string>
     <string name="place_holder_button">Обновить</string>
+    <string name="player_track_length">0:00</string>
+    <string name="player_track_duration">Длительность</string>
+    <string name="player_track_album_name">Альбом</string>
+    <string name="player_year_info">Год</string>
+    <string name="player_genre_info">Жанр</string>
+    <string name="player_country_info">Страна</string>
 
 </resources>
