@@ -21,11 +21,10 @@
     <string name="nothing_found">Ничего не нашлось</string>
     <string name="something_went" translatable="false">Проблемы со связью \n \n Загрузка не удалась. Проверьте подключение к интернету</string>
     <string name="place_holder_button">Обновить</string>
-    <string name="player_track_length">0:00</string>
-    <string name="player_track_duration">Длительность</string>
-    <string name="player_track_album_name">Альбом</string>
-    <string name="player_year_info">Год</string>
-    <string name="player_genre_info">Жанр</string>
-    <string name="player_country_info">Страна</string>
-
+    <string name="player_track_length" translatable="false">00:00</string>
+    <string name="player_track_duration" translatable="false">Длительность</string>
+    <string name="player_track_album_name" translatable="false">Альбом</string>
+    <string name="player_year_info" translatable="false">Год</string>
+    <string name="player_genre_info" translatable="false">Жанр</string>
+    <string name="player_country_info" translatable="false">Страна</string>
 </resources>

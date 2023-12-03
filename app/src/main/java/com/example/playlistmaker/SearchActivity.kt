@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.TypedValue
@@ -30,6 +32,20 @@ import com.example.playlistmaker.TrackAdapter
 
 
 class SearchActivity : AppCompatActivity() {
+    companion object {
+        private const val CLICK_DEBOUNCE_DELAY = 1000L
+        private const val SEARCH_DEBOUNCE_DELAY = 2000L
+    }
+
+    private var isClickAllowed = true
+
+    private val handler = Handler(Looper.getMainLooper())
+    private val searchRunnable = Runnable { search() }
+    private fun searchDebounce() {
+        handler.removeCallbacks(searchRunnable)
+        handler.postDelayed(searchRunnable, SEARCH_DEBOUNCE_DELAY)
+    }
+
     private lateinit var sharedPreferences: SharedPreferences
     val userPreferences = UserPreferences()
 
@@ -159,6 +175,8 @@ class SearchActivity : AppCompatActivity() {
                 } else {
                     historyPlaceHolder.visibility = View.GONE
                 }
+
+                searchDebounce()
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -266,6 +284,8 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun search() {
+        binding.progressBar.visibility = View.VISIBLE
+
         if (searchBar.text.isNotEmpty()) {
             historyPlaceHolder.visibility = View.GONE
             itunesService.search(searchBar.text.toString())
@@ -275,6 +295,8 @@ class SearchActivity : AppCompatActivity() {
                         call: Call<TracksResponse>,
                         response: Response<TracksResponse>
                     ) {
+                        binding.progressBar.visibility = View.GONE
+
                         if (response.code() == 200) {
                             clearList()
 
@@ -294,6 +316,8 @@ class SearchActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<TracksResponse>, t: Throwable) {
+                        binding.progressBar.visibility = View.GONE
+
                         showPlaceHolder(getString(R.string.something_went))
                     }
                 })
@@ -304,10 +328,21 @@ class SearchActivity : AppCompatActivity() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun openPlayer(track: Track) {
-        SearchHistory.add(track)
-        val playerIntent = Intent(this, PlayerActivity::class.java)
-        playerIntent.putExtra("track", track)
-        startActivity(playerIntent)
-        historyTrackAdapter.notifyDataSetChanged()
+        if(clickDebounce()) {
+            SearchHistory.add(track)
+            val playerIntent = Intent(this, PlayerActivity::class.java)
+            playerIntent.putExtra("track", track)
+            startActivity(playerIntent)
+            historyTrackAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun clickDebounce() : Boolean {
+        val current = isClickAllowed
+        if (isClickAllowed) {
+            isClickAllowed = false
+            handler.postDelayed({ isClickAllowed = true }, CLICK_DEBOUNCE_DELAY)
+        }
+        return current
     }
 }
