@@ -122,7 +122,7 @@ class PlayerActivity : AppCompatActivity() {
 
     private fun startPlayer() {
         mediaPlayer.start()
-        handler.postDelayed({ startTimer() }, SECOND / 2)
+        handler.postDelayed( {updateTimer()}, SECOND / 2)
         setPlayButtonIcon(R.attr.pause_button)
         playerState = STATE_PLAYING
     }
@@ -153,27 +153,27 @@ class PlayerActivity : AppCompatActivity() {
         binding.playerPlayButton.setBackgroundResource(typedValue.resourceId)
     }
 
-    private fun startTimer() {
-        updateTimer()
-    }
-
     private fun updateTimer() {
-        timerRunnable = object : Runnable {
-            override fun run() {
-                binding.playerDuration.text =
-                    SimpleDateFormat(
-                        "mm:ss",
-                        Locale.getDefault()
-                    ).format(mediaPlayer.currentPosition)
-                handler.postDelayed(this, SECOND / 3)
+        if (mediaPlayer.isPlaying
+            && playerState == STATE_PLAYING
+            ) {
+            timerRunnable = object : Runnable {
+                override fun run() {
+                    binding.playerDuration.text =
+                        SimpleDateFormat(
+                            "mm:ss",
+                            Locale.getDefault()
+                        ).format(mediaPlayer.currentPosition)
+                    handler.postDelayed(this, SECOND / 3)
+                }
             }
+            handler.post(timerRunnable!!)
         }
-        handler.post(timerRunnable!!)
     }
 
     private fun resetTimer() {
-        if (timerRunnable != null) {
-            handler.removeCallbacks(timerRunnable!!)
+        if (timerRunnable != null && (playerState == STATE_PAUSED || playerState == STATE_PREPARED) && !mediaPlayer.isPlaying) {
+            handler.removeCallbacksAndMessages(null)
             timerRunnable = null
         }
     }
