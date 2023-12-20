@@ -4,6 +4,8 @@
     <attr name="placeholder_image_error" />
     <attr name="add_button" />
     <attr name="like_button" />
+    <attr name="play_button" />
+    <attr name="pause_button" />
 
     <style name="Main.Screen.Theme" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/main_background_blue</item>
@@ -19,7 +21,8 @@
         <item name="colorOnPrimary">@color/main_font_black</item>
         <item name="add_button">@drawable/add_button</item>
         <item name="like_button">@drawable/like_button</item>
-
+        <item name="play_button">@drawable/play_button</item>
+        <item name="pause_button">@drawable/pause_button</item>
     </style>
 
     <style name="Search.Screen.Theme" parent="Second.Screen.Theme">

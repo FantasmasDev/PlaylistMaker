@@ -1,5 +1,6 @@
 package com.example.playlistmaker
 
+import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -25,19 +26,23 @@ class MainActivity : AppCompatActivity() {
             (applicationContext as App).switcherTheme(true)
         }
 
-        binding.searchButton.setOnClickListener {
-            val searchIntent = Intent(this, SearchActivity::class.java)
-            startActivity(searchIntent)
-        }
+        binding.apply {
+            searchButton.setOnClickListener {
+                openScreen(SearchActivity::class.java)
+            }
 
-        binding.libraryButton.setOnClickListener {
-            val libraryIntent = Intent(this, LibraryActivity::class.java)
-            startActivity(libraryIntent)
-        }
+            libraryButton.setOnClickListener {
+                openScreen(LibraryActivity::class.java)
+            }
 
-        binding.settingButton.setOnClickListener {
-            val settingsIntent = Intent(this, SettingsAcivity::class.java)
-            startActivity(settingsIntent)
+            settingButton.setOnClickListener {
+                openScreen(SettingsAcivity::class.java)
+            }
         }
+    }
+
+    private fun openScreen(activity: Class<*>){
+        val intent = Intent(this@MainActivity, activity)
+        startActivity(intent)
     }
 }
