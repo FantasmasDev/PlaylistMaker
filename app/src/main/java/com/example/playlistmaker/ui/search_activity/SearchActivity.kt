@@ -1,4 +1,4 @@
-package com.example.playlistmaker
+package com.example.playlistmaker.ui.search_activity
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -20,7 +20,15 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.playlistmaker.R
+import com.example.playlistmaker.SearchHistory
+import com.example.playlistmaker.presentation.model.Track
+import com.example.playlistmaker.TrackAdapter
+import com.example.playlistmaker.TracksResponse
+import com.example.playlistmaker.ui.main.USER_PREFERENCES
+import com.example.playlistmaker.UserPreferences
 import com.example.playlistmaker.databinding.ActivitySearchBinding
+import com.example.playlistmaker.itunesAPI
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -28,7 +36,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import com.example.playlistmaker.TrackAdapter
+import com.example.playlistmaker.ui.player_activity.PlayerActivity
 
 
 class SearchActivity : AppCompatActivity() {
@@ -328,7 +336,7 @@ class SearchActivity : AppCompatActivity() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun openPlayer(track: Track) {
-        if(clickDebounce()) {
+        if (clickDebounce()) {
             SearchHistory.add(track)
             val playerIntent = Intent(this, PlayerActivity::class.java)
             playerIntent.putExtra("track", track)
@@ -337,7 +345,7 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun clickDebounce() : Boolean {
+    private fun clickDebounce(): Boolean {
         val current = isClickAllowed
         if (isClickAllowed) {
             isClickAllowed = false

@@ -1,4 +1,4 @@
-package com.example.playlistmaker
+package com.example.playlistmaker.ui.settings_activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -7,7 +7,11 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Switch
+import com.example.playlistmaker.App
+import com.example.playlistmaker.R
+import com.example.playlistmaker.UserPreferences
 import com.example.playlistmaker.databinding.ActivitySettingsBinding
+import com.example.playlistmaker.ui.main.USER_PREFERENCES
 
 class SettingsAcivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences

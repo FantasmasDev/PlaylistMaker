@@ -1,6 +1,9 @@
 package com.example.playlistmaker
 
 import android.content.SharedPreferences
+import com.example.playlistmaker.presentation.model.Track
+import com.example.playlistmaker.ui.main.THEME_SWITCH_STATE
+import com.example.playlistmaker.ui.main.TRACKS_HISTORY
 import com.google.gson.Gson
 
 class UserPreferences {
