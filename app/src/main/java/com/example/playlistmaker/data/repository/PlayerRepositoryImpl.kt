@@ -34,12 +34,6 @@ class PlayerRepositoryImpl() : PlayerRepository {
         }
         player.player.setOnCompletionListener {
             completionCallBack?.invoke()
-
-//
-//            playerState
-//            resetTimer()
-//            binding.playerDuration.setText(R.string.player_track_length)
-//            setPlayButtonIcon(R.attr.play_button)
         }
     }
 

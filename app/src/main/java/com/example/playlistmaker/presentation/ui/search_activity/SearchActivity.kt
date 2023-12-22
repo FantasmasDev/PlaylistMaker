@@ -1,4 +1,4 @@
-package com.example.playlistmaker.ui.search_activity
+package com.example.playlistmaker.presentation.ui.search_activity
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -23,9 +23,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.playlistmaker.R
 import com.example.playlistmaker.SearchHistory
 import com.example.playlistmaker.presentation.model.Track
-import com.example.playlistmaker.TrackAdapter
+import com.example.playlistmaker.presentation.adapters.TrackAdapter
 import com.example.playlistmaker.TracksResponse
-import com.example.playlistmaker.ui.main.USER_PREFERENCES
+import com.example.playlistmaker.presentation.ui.main.USER_PREFERENCES
 import com.example.playlistmaker.UserPreferences
 import com.example.playlistmaker.databinding.ActivitySearchBinding
 import com.example.playlistmaker.itunesAPI
@@ -36,7 +36,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import com.example.playlistmaker.ui.player_activity.PlayerActivity
+import com.example.playlistmaker.presentation.ui.player_activity.PlayerActivity
 
 
 class SearchActivity : AppCompatActivity() {

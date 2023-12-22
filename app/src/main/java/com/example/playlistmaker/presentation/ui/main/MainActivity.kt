@@ -1,15 +1,15 @@
-package com.example.playlistmaker.ui.main
+package com.example.playlistmaker.presentation.ui.main
 
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.playlistmaker.App
-import com.example.playlistmaker.ui.settings_activity.SettingsAcivity
+import com.example.playlistmaker.presentation.ui.settings_activity.SettingsAcivity
 import com.example.playlistmaker.UserPreferences
 import com.example.playlistmaker.databinding.ActivityMainBinding
-import com.example.playlistmaker.ui.library_activity.LibraryActivity
-import com.example.playlistmaker.ui.search_activity.SearchActivity
+import com.example.playlistmaker.presentation.ui.library_activity.LibraryActivity
+import com.example.playlistmaker.presentation.ui.search_activity.SearchActivity
 
 const val USER_PREFERENCES = "user_history"
 const val TRACKS_HISTORY = "tracks_history"
