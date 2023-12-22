@@ -1,5 +1,7 @@
 package com.example.playlistmaker
 
+import com.example.playlistmaker.presentation.model.Track
+
 object SearchHistory {
     private var historyTrackList = ArrayList<Track>()
 

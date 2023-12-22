@@ -16,22 +16,22 @@
         android:theme="@style/Main.Screen.Theme"
         tools:targetApi="31">
         <activity
-            android:name=".PlayerActivity"
+            android:name=".presentation.ui.player_activity.PlayerActivity"
             android:exported="false"
             android:theme="@style/Second.Screen.Theme"/>
         <activity
-            android:name=".SearchActivity"
+            android:name=".presentation.ui.search_activity.SearchActivity"
             android:exported="false"
             android:theme="@style/Search.Screen.Theme" />
         <activity
-            android:name=".LibraryActivity"
+            android:name=".presentation.ui.library_activity.LibraryActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsAcivity"
+            android:name=".presentation.ui.settings_activity.SettingsAcivity"
             android:exported="false"
             android:theme="@style/Second.Screen.Theme" />
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
