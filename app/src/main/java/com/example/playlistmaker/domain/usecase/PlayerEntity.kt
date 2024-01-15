@@ -4,7 +4,7 @@ import com.example.playlistmaker.domain.models.CurrentTimeDomainModel
 import com.example.playlistmaker.domain.models.PlayerStateDomain
 import com.example.playlistmaker.domain.repository.PlayerRepository
 import com.example.playlistmaker.presentation.mapper.TrackMapper
-import com.example.playlistmaker.presentation.model.Track
+import com.example.playlistmaker.presentation.models.Track
 
 class PlayerEntity(private val playerRepository: PlayerRepository) {
 

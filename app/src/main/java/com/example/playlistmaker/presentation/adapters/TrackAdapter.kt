@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.playlistmaker.R
 import com.example.playlistmaker.presentation.holders.TrackViewHolder
-import com.example.playlistmaker.presentation.model.Track
+import com.example.playlistmaker.presentation.models.Track
 
 class TrackAdapter(
     private val clickListener: TrackClickListener,

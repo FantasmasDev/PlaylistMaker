@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.playlistmaker.R
 import com.example.playlistmaker.presentation.adapters.TrackAdapter
-import com.example.playlistmaker.presentation.model.Track
+import com.example.playlistmaker.presentation.models.Track
 import java.text.SimpleDateFormat
 import java.util.Locale
 

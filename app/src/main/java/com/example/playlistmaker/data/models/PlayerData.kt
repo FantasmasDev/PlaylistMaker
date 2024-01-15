@@ -1,4 +1,4 @@
-package com.example.playlistmaker.data.model
+package com.example.playlistmaker.data.models
 
 import android.media.MediaPlayer
 

@@ -2,10 +2,10 @@ package com.example.playlistmaker.data.repository
 
 import android.media.MediaPlayer
 import com.example.playlistmaker.data.mapper.DataMapper
-import com.example.playlistmaker.data.model.PlayerData
+import com.example.playlistmaker.data.models.PlayerData
 import com.example.playlistmaker.domain.models.CurrentTimeDomainModel
 import com.example.playlistmaker.domain.models.PlayerStateDomain
-import com.example.playlistmaker.domain.models.TrackDomainModel
+import com.example.playlistmaker.domain.models.TrackURLDomainModel
 import com.example.playlistmaker.domain.repository.PlayerRepository
 
 class PlayerRepositoryImpl() : PlayerRepository {
@@ -18,7 +18,7 @@ class PlayerRepositoryImpl() : PlayerRepository {
 
 
 
-    override fun prepare(track: TrackDomainModel) {
+    override fun prepare(track: TrackURLDomainModel) {
         val currentTrack = DataMapper.mapToStorageTrackModel(
             track
         )
