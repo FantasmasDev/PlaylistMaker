@@ -1,6 +1,5 @@
-package com.example.playlistmaker
+package com.example.playlistmaker.presentation.ui.player_activity
 
-import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -11,29 +10,31 @@ import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.playlistmaker.Creator.Creator
+import com.example.playlistmaker.R
+import com.example.playlistmaker.presentation.model.Track
 import com.example.playlistmaker.databinding.PlayerLayoutBinding
+import com.example.playlistmaker.domain.models.PlayerStateDomain
+import com.example.playlistmaker.presentation.mapper.TrackMapper
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class PlayerActivity : AppCompatActivity() {
-    companion object {
-        private const val STATE_DEFAULT = 0
-        private const val STATE_PREPARED = 1
-        private const val STATE_PLAYING = 2
-        private const val STATE_PAUSED = 3
+    private val playerEntity = Creator.providePlayerEntity()
 
+    companion object {
         private const val SECOND = 1000L
+        private const val HALF_SECOND = 500L
+        private const val THIRD_OF_SECOND = 333L
     }
 
     private var timerRunnable: Runnable? = null
-//    private var isTimeAllowed = true
+
 
     private lateinit var binding: PlayerLayoutBinding
 
-    private lateinit var track: Track
 
-    private var mediaPlayer = MediaPlayer()
-    private var playerState = STATE_DEFAULT
+    private lateinit var track: Track
 
     lateinit var handler: Handler
 
@@ -45,6 +46,7 @@ class PlayerActivity : AppCompatActivity() {
         track = intent.getParcelableExtra("track")!!
 
         preparePlayer()
+
         handler = Handler(Looper.getMainLooper())
 
         binding.apply {
@@ -78,8 +80,6 @@ class PlayerActivity : AppCompatActivity() {
             playerPlayButton.setOnClickListener {
                 playbackControl()
             }
-
-            playerAddButton.setOnClickListener { addTrackToHistory(track) }
         }
     }
 
@@ -91,11 +91,7 @@ class PlayerActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         resetTimer()
-        mediaPlayer.release()
-    }
-
-    fun addTrackToHistory(track: Track) {
-        SearchHistory.add(track)
+        playerEntity.release()
     }
 
     fun dpToPx(dp: Float, context: View): Int {
@@ -107,41 +103,48 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun preparePlayer() {
-        mediaPlayer.setDataSource(track.previewUrl)
-        mediaPlayer.prepareAsync()
-        mediaPlayer.setOnPreparedListener {
-            playerState = STATE_PREPARED
-        }
-        mediaPlayer.setOnCompletionListener {
-            playerState = STATE_PREPARED
-            resetTimer()
-            binding.playerDuration.setText(R.string.player_track_length)
-            setPlayButtonIcon(R.attr.play_button)
-        }
+        playerEntity.setOnPreparedListener(::preparedListener)
+        playerEntity.setOnCompletionListener(::completionListener)
+        playerEntity.prepare(track)
+    }
+
+    private fun preparedListener() {
+        playerEntity.setState(PlayerStateDomain.STATE_PREPARED)
+    }
+
+    private fun completionListener() {
+        playerEntity.setState(PlayerStateDomain.STATE_PREPARED)
+        resetTimer()
+        binding.playerDuration.setText(R.string.player_track_length)
+        setPlayButtonIcon(R.attr.play_button)
     }
 
     private fun startPlayer() {
-        mediaPlayer.start()
-        handler.postDelayed( {updateTimer()}, SECOND / 2)
+        playerEntity.play()
+        handler.postDelayed({ updateTimer() }, HALF_SECOND)
         setPlayButtonIcon(R.attr.pause_button)
-        playerState = STATE_PLAYING
+        playerEntity.setState(PlayerStateDomain.STATE_PLAYING)
     }
 
     private fun pausePlayer() {
         resetTimer()
-        mediaPlayer.pause()
+        playerEntity.pause()
         setPlayButtonIcon(R.attr.play_button)
-        playerState = STATE_PAUSED
+        playerEntity.setState(PlayerStateDomain.STATE_PAUSED)
     }
 
     private fun playbackControl() {
-        when (playerState) {
-            STATE_PLAYING -> {
+        when (
+            playerEntity.getCurrentState()
+        ) {
+            PlayerStateDomain.STATE_PLAYING -> {
                 pausePlayer()
             }
-
-            STATE_PREPARED, STATE_PAUSED -> {
+            PlayerStateDomain.STATE_PREPARED, PlayerStateDomain.STATE_PAUSED -> {
                 startPlayer()
+            }
+            else -> {
+                return
             }
         }
     }
@@ -154,17 +157,21 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun updateTimer() {
-        if (mediaPlayer.isPlaying
-            && playerState == STATE_PLAYING
-            ) {
+        if (
+            playerEntity.isPlaying()
+            && playerEntity.getCurrentState() == PlayerStateDomain.STATE_PLAYING
+        ) {
             timerRunnable = object : Runnable {
                 override fun run() {
                     binding.playerDuration.text =
                         SimpleDateFormat(
                             "mm:ss",
                             Locale.getDefault()
-                        ).format(mediaPlayer.currentPosition)
-                    handler.postDelayed(this, SECOND / 3)
+                        ).format(
+                            TrackMapper.mapToCurrentTimePresentationModel(playerEntity.getCurrentPosition()).time
+                        )
+
+                    handler.postDelayed(this, THIRD_OF_SECOND)
                 }
             }
             handler.post(timerRunnable!!)
@@ -172,7 +179,13 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun resetTimer() {
-        if (timerRunnable != null && (playerState == STATE_PAUSED || playerState == STATE_PREPARED) && !mediaPlayer.isPlaying) {
+        if (timerRunnable != null && (playerEntity.getCurrentState() == PlayerStateDomain.STATE_PAUSED
+                    ||
+                    playerEntity.getCurrentState() == PlayerStateDomain.STATE_PREPARED
+                    ) &&
+
+            !playerEntity.isPlaying()
+        ) {
             handler.removeCallbacksAndMessages(null)
             timerRunnable = null
         }

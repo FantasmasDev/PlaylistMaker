@@ -1,4 +1,4 @@
-package com.example.playlistmaker
+package com.example.playlistmaker.presentation.ui.settings_activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -7,7 +7,11 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Switch
+import com.example.playlistmaker.App
+import com.example.playlistmaker.R
+import com.example.playlistmaker.UserPreferences
 import com.example.playlistmaker.databinding.ActivitySettingsBinding
+import com.example.playlistmaker.presentation.ui.main.USER_PREFERENCES
 
 class SettingsAcivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
@@ -27,11 +31,10 @@ class SettingsAcivity : AppCompatActivity() {
 
         themeSwitcher = binding.themeSwitcher
 
-        if(userPreferences.readSwitchState(sharedPreferences)) {
-            themeSwitcher.isChecked = true
-        }
+        themeSwitcher.isChecked = userPreferences.readSwitchState(sharedPreferences)
 
-        themeSwitcher.setOnCheckedChangeListener { switcher, checked -> (applicationContext as App).switcherTheme(checked)}
+        themeSwitcher.setOnCheckedChangeListener { switcher, checked -> (applicationContext as App).switcherTheme(checked)
+        userPreferences.writeTheme(sharedPreferences, checked)}
 
         binding.settingHomeButton.setOnClickListener {
             finish()
