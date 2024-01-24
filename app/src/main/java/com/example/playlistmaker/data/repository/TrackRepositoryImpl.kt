@@ -11,7 +11,6 @@ class TrackRepositoryImpl(private val networkClient: NetworkClient) : TrackRepos
 
     override fun searchTracks(expression: String): Resource<ArrayList<TrackDomain>> {
         val response = networkClient.doRequest(TrackSearchRequest(expression))
-        //Todo проверить условие
 
         return when (response.resultCode) {
             -1 -> {
