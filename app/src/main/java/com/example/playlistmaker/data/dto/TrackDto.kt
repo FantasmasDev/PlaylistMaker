@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class TrackDTO(
+data class TrackDto(
     val trackName: String,
     val artistName: String,
     val trackTimeMillis: Int,

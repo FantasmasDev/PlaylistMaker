@@ -1,4 +1,4 @@
-package com.example.playlistmaker.presentation.holders
+package com.example.playlistmaker.presentation.ui.search_activity.holders
 
 import android.util.TypedValue
 import android.view.View
@@ -9,8 +9,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.playlistmaker.R
-import com.example.playlistmaker.presentation.adapters.TrackAdapter
-import com.example.playlistmaker.presentation.models.Track
+import com.example.playlistmaker.domain.models.TrackDomain
+import com.example.playlistmaker.presentation.ui.search_activity.adapters.TrackAdapter
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -28,11 +28,12 @@ class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         albumPicView = itemView.findViewById(R.id.album_pic)
     }
 
-    fun bind(track: Track, clickListener: TrackAdapter.TrackClickListener) {
+    fun bind(track: TrackDomain, clickListener: TrackAdapter.TrackClickListener) {
         itemView.setOnClickListener { clickListener.onTrackClick(track) }
         trackNameView.text = track.trackName
         artistNameView.text = track.artistName
-        trackTimeView.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis.toLong())
+        trackTimeView.text =
+            SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis.toLong())
         val cornerRadiusDP = 2F
         Glide.with(itemView)
             .load(track.artworkUrl100)

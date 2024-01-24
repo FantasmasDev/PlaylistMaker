@@ -2,8 +2,6 @@ package com.example.playlistmaker.presentation.ui.player_activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.TypedValue
 import android.view.View
 import androidx.core.view.isVisible
@@ -12,12 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.example.playlistmaker.Creator.Creator
 import com.example.playlistmaker.R
-import com.example.playlistmaker.presentation.models.Track
 import com.example.playlistmaker.databinding.PlayerLayoutBinding
-import com.example.playlistmaker.domain.models.PlayerStateDomain
-import com.example.playlistmaker.presentation.mapper.TrackMapper
+import com.example.playlistmaker.domain.models.TrackDomain
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -27,9 +22,7 @@ class PlayerActivity : AppCompatActivity() {
 
     private lateinit var binding: PlayerLayoutBinding
 
-    private lateinit var track: Track
-
-    lateinit var handler: Handler
+    private lateinit var track: TrackDomain
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,20 +31,17 @@ class PlayerActivity : AppCompatActivity() {
 
         track = intent.getParcelableExtra("track")!!
 
-        vm = ViewModelProvider(this, PlayerViewModelFactory(track, this)).get(PlayerViewModel::class.java)
+        vm = ViewModelProvider(
+            this,
+            PlayerViewModelFactory(track, this)
+        ).get(PlayerViewModel::class.java)
 
-        vm.timerText.observe(this, Observer{
-            binding.playerDuration.text = it
-        })
-
-        vm.isPlay.observe(this, Observer{
-            setPlayButtonIcon(it)
+        vm.getViewState().observe(this, Observer {
+            setPlayButtonIcon(it.isPlaying)
+            binding.playerDuration.text = it.currentTime
         })
 
         vm.preparePlayer()
-
-        // TODO придумать перенос хандер в вм
-        handler = Handler(Looper.getMainLooper())
 
         binding.apply {
             playerTrackName.text = track.trackName
@@ -93,9 +83,9 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         vm.resetTimer()
         vm.release()
+        super.onDestroy()
     }
 
     private fun dpToPx(dp: Float, context: View): Int {
@@ -109,7 +99,7 @@ class PlayerActivity : AppCompatActivity() {
     private fun setPlayButtonIcon(
         isPlay: Boolean
     ) {
-        val attributeId = if (isPlay){
+        val attributeId = if (isPlay) {
             R.attr.pause_button
         } else {
             R.attr.play_button

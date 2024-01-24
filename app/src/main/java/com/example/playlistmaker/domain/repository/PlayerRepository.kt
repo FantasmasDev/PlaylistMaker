@@ -13,9 +13,9 @@ interface PlayerRepository {
 
     fun getCurrentPosition(): CurrentTimeDomainModel
 
-    fun setOnPreparedListener(callback: ()-> Unit)
+    fun setOnPreparedListener(callback: () -> Unit)
 
-    fun setOnCompletionListener(callback: ()-> Unit)
+    fun setOnCompletionListener(callback: () -> Unit)
 
     fun setCurrentState(playerStateDomain: PlayerStateDomain)
 

@@ -11,18 +11,16 @@ import com.example.playlistmaker.domain.repository.PlayerRepository
 class PlayerRepositoryImpl() : PlayerRepository {
 
     private lateinit var player: PlayerData
-    private lateinit var playerState: PlayerStateDomain
+
+    private var playerState: PlayerStateDomain = PlayerStateDomain.STATE_DEFAULT
 
     private var preparedCallBack: (() -> Unit)? = null
     private var completionCallBack: (() -> Unit)? = null
-
-
 
     override fun prepare(track: TrackURLDomainModel) {
         val currentTrack = DataMapper.mapToStorageTrackModel(
             track
         )
-
 
         player = PlayerData(MediaPlayer())
 
@@ -53,11 +51,11 @@ class PlayerRepositoryImpl() : PlayerRepository {
         return CurrentTimeDomainModel(player.player.currentPosition)
     }
 
-    override fun setOnPreparedListener(callback: ()-> Unit) {
+    override fun setOnPreparedListener(callback: () -> Unit) {
         preparedCallBack = callback
     }
 
-    override fun setOnCompletionListener(callback: ()-> Unit){
+    override fun setOnCompletionListener(callback: () -> Unit) {
         completionCallBack = callback
     }
 

@@ -1,6 +1,5 @@
 package com.example.playlistmaker.data.models
 
-
-data class TrackURLDataModel(
+data class TrackUrlDataModel(
     val previewUrl: String
 )

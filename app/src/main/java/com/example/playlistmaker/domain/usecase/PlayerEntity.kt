@@ -2,52 +2,51 @@ package com.example.playlistmaker.domain.usecase
 
 import com.example.playlistmaker.domain.models.CurrentTimeDomainModel
 import com.example.playlistmaker.domain.models.PlayerStateDomain
+import com.example.playlistmaker.domain.models.TrackDomain
 import com.example.playlistmaker.domain.repository.PlayerRepository
 import com.example.playlistmaker.presentation.mapper.TrackMapper
-import com.example.playlistmaker.presentation.models.Track
 
 class PlayerEntity(private val playerRepository: PlayerRepository) {
 
-    fun prepare(track: Track){
+    fun prepare(track: TrackDomain) {
         playerRepository.prepare(TrackMapper.mapToDomain(track))
     }
 
-    fun pause(){
+    fun pause() {
         playerRepository.pause()
     }
 
-    fun play(){
+    fun play() {
         playerRepository.play()
     }
 
-    fun release(){
+    fun release() {
         playerRepository.release()
     }
 
-    fun getCurrentPosition(): CurrentTimeDomainModel{
+    fun getCurrentPosition(): CurrentTimeDomainModel {
         return playerRepository.getCurrentPosition()
     }
 
-    fun setOnPreparedListener(callback: ()-> Unit){
+    fun setOnPreparedListener(callback: () -> Unit) {
         playerRepository.setOnPreparedListener(callback)
     }
 
-    fun setOnCompletionListener(callback: ()-> Unit){
+    fun setOnCompletionListener(callback: () -> Unit) {
         playerRepository.setOnCompletionListener(callback)
     }
 
-    fun setState(playerStateDomain: PlayerStateDomain){
+    fun setState(playerStateDomain: PlayerStateDomain) {
         playerRepository.setCurrentState(playerStateDomain)
     }
 
-    fun getCurrentState(): PlayerStateDomain{
+    fun getCurrentState(): PlayerStateDomain {
         return playerRepository.getCurrentState()
     }
 
-    fun isPlaying():Boolean{
+    fun isPlaying(): Boolean {
         return playerRepository.isPlaying()
     }
-
 
 
 }
