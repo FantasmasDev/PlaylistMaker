@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -27,7 +28,7 @@
             android:name=".presentation.ui.library_activity.LibraryActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.ui.settings_activity.SettingsAcivity"
+            android:name=".presentation.ui.settings_activity.SettingsActivity"
             android:exported="false"
             android:theme="@style/Second.Screen.Theme" />
         <activity

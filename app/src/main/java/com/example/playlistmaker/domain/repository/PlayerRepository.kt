@@ -2,10 +2,10 @@ package com.example.playlistmaker.domain.repository
 
 import com.example.playlistmaker.domain.models.CurrentTimeDomainModel
 import com.example.playlistmaker.domain.models.PlayerStateDomain
-import com.example.playlistmaker.domain.models.TrackDomainModel
+import com.example.playlistmaker.domain.models.TrackURLDomainModel
 
 interface PlayerRepository {
-    fun prepare(track: TrackDomainModel)
+    fun prepare(track: TrackURLDomainModel)
     fun pause()
     fun play()
 
@@ -13,9 +13,9 @@ interface PlayerRepository {
 
     fun getCurrentPosition(): CurrentTimeDomainModel
 
-    fun setOnPreparedListener(callback: ()-> Unit)
+    fun setOnPreparedListener(callback: () -> Unit)
 
-    fun setOnCompletionListener(callback: ()-> Unit)
+    fun setOnCompletionListener(callback: () -> Unit)
 
     fun setCurrentState(playerStateDomain: PlayerStateDomain)
 

@@ -1,17 +1,16 @@
 package com.example.playlistmaker.data.mapper
 
-import com.example.playlistmaker.data.model.PlayerData
-import com.example.playlistmaker.data.model.TrackDataModel
-import com.example.playlistmaker.domain.models.TrackDomainModel
+import com.example.playlistmaker.data.models.TrackUrlDataModel
+import com.example.playlistmaker.domain.models.TrackURLDomainModel
 
 object DataMapper {
-    fun mapToStorageTrackModel(track: TrackDomainModel): TrackDataModel {
-        return TrackDataModel(
+    fun mapToStorageTrackModel(track: TrackURLDomainModel): TrackUrlDataModel {
+        return TrackUrlDataModel(
             previewUrl = track.previewUrl
         )
     }
-    fun mapToDomainTrackModel(track: TrackDataModel): TrackDomainModel {
-        return TrackDomainModel(
+    fun mapToDomainTrackModel(track: TrackUrlDataModel): TrackURLDomainModel {
+        return TrackURLDomainModel(
             previewUrl = track.previewUrl
         )
     }

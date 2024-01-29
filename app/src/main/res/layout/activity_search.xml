@@ -7,7 +7,7 @@
     <LinearLayout style="@style/ScreenHeaderLayout">
 
         <ImageButton
-            android:id="@+id/search_home_button"
+            android:id="@+id/go_home_button"
             style="@style/ScreenHeaderButton"
             android:importantForAccessibility="no"
             android:src="@drawable/back_arrow"
@@ -103,10 +103,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/error_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/placeholder_image"
@@ -120,7 +122,6 @@
                 android:id="@+id/placeholder_button"
                 style="@style/placeholder_button"
                 android:text="@string/place_holder_button"
-
                 />
         </LinearLayout>
 
