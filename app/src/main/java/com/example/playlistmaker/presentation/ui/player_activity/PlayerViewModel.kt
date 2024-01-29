@@ -9,14 +9,14 @@ import androidx.lifecycle.ViewModel
 import com.example.playlistmaker.R
 import com.example.playlistmaker.domain.models.PlayerStateDomain
 import com.example.playlistmaker.domain.models.TrackDomain
-import com.example.playlistmaker.domain.usecase.PlayerEntity
+import com.example.playlistmaker.domain.usecase.PlayerInteractor
 import com.example.playlistmaker.presentation.mapper.TrackMapper
 import com.example.playlistmaker.presentation.ui.player_activity.models.PlayerViewState
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class PlayerViewModel(
-    private val playerEntity: PlayerEntity,
+    private val playerInteractor: PlayerInteractor,
     private val track: TrackDomain,
     context: Context
 ) : ViewModel() {
@@ -41,38 +41,38 @@ class PlayerViewModel(
     fun getViewState(): LiveData<PlayerViewState> = viewState
 
     fun preparePlayer() {
-        playerEntity.setOnPreparedListener(::preparedListener)
-        playerEntity.setOnCompletionListener(::completionListener)
-        playerEntity.prepare(track)
+        playerInteractor.setOnPreparedListener(::preparedListener)
+        playerInteractor.setOnCompletionListener(::completionListener)
+        playerInteractor.prepare(track)
     }
 
     private fun preparedListener() {
-        playerEntity.setState(PlayerStateDomain.STATE_PREPARED)
+        playerInteractor.setState(PlayerStateDomain.STATE_PREPARED)
     }
 
     private fun completionListener() {
-        playerEntity.setState(PlayerStateDomain.STATE_PREPARED)
+        playerInteractor.setState(PlayerStateDomain.STATE_PREPARED)
         resetTimer()
         viewState.postValue(PlayerViewState(false, defTime))
     }
 
     private fun startPlayer() {
-        playerEntity.play()
+        playerInteractor.play()
         handler.postDelayed({ updateTimer() }, HALF_SECOND)
         viewState.postValue(viewState.value?.let { PlayerViewState(true, it.currentTime) })
-        playerEntity.setState(PlayerStateDomain.STATE_PLAYING)
+        playerInteractor.setState(PlayerStateDomain.STATE_PLAYING)
     }
 
     fun pausePlayer() {
         resetTimer()
-        playerEntity.pause()
+        playerInteractor.pause()
         viewState.postValue(viewState.value?.let { PlayerViewState(false, it.currentTime) })
-        playerEntity.setState(PlayerStateDomain.STATE_PAUSED)
+        playerInteractor.setState(PlayerStateDomain.STATE_PAUSED)
     }
 
     fun playbackControl() {
         when (
-            playerEntity.getCurrentState()
+            playerInteractor.getCurrentState()
         ) {
             PlayerStateDomain.STATE_PLAYING -> {
                 pausePlayer()
@@ -90,8 +90,8 @@ class PlayerViewModel(
 
     private fun updateTimer() {
         if (
-            playerEntity.isPlaying()
-            && playerEntity.getCurrentState() == PlayerStateDomain.STATE_PLAYING
+            playerInteractor.isPlaying()
+            && playerInteractor.getCurrentState() == PlayerStateDomain.STATE_PLAYING
         ) {
             timerRunnable = object : Runnable {
                 override fun run() {
@@ -101,7 +101,7 @@ class PlayerViewModel(
                                 "mm:ss",
                                 Locale.getDefault()
                             ).format(
-                                TrackMapper.mapToCurrentTimePresentationModel(playerEntity.getCurrentPosition()).time
+                                TrackMapper.mapToCurrentTimePresentationModel(playerInteractor.getCurrentPosition()).time
                             )
                         )
                     })
@@ -113,12 +113,12 @@ class PlayerViewModel(
     }
 
     fun resetTimer() {
-        if (timerRunnable != null && (playerEntity.getCurrentState() == PlayerStateDomain.STATE_PAUSED
+        if (timerRunnable != null && (playerInteractor.getCurrentState() == PlayerStateDomain.STATE_PAUSED
                     ||
-                    playerEntity.getCurrentState() == PlayerStateDomain.STATE_PREPARED
+                    playerInteractor.getCurrentState() == PlayerStateDomain.STATE_PREPARED
                     ) &&
 
-            !playerEntity.isPlaying()
+            !playerInteractor.isPlaying()
         ) {
             handler.removeCallbacksAndMessages(null)
             timerRunnable = null
@@ -126,6 +126,6 @@ class PlayerViewModel(
     }
 
     fun release() {
-        playerEntity.release()
+        playerInteractor.release()
     }
 }

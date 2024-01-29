@@ -13,12 +13,18 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.playlistmaker.R
 import com.example.playlistmaker.databinding.PlayerLayoutBinding
 import com.example.playlistmaker.domain.models.TrackDomain
+import com.example.playlistmaker.presentation.ui.main.MainViewModel
+import com.example.playlistmaker.presentation.ui.settings_activity.SettingsViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class PlayerActivity : AppCompatActivity() {
 
-    private lateinit var vm: PlayerViewModel
+    private val vm: PlayerViewModel by viewModel{
+        parametersOf(track)
+    }
 
     private lateinit var binding: PlayerLayoutBinding
 
@@ -30,11 +36,6 @@ class PlayerActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         track = intent.getParcelableExtra("track")!!
-
-        vm = ViewModelProvider(
-            this,
-            PlayerViewModelFactory(track, this)
-        ).get(PlayerViewModel::class.java)
 
         vm.getViewState().observe(this, Observer {
             setPlayButtonIcon(it.isPlaying)

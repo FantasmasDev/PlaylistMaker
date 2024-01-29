@@ -3,6 +3,7 @@ package com.example.playlistmaker.presentation.ui.search_activity
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -28,10 +29,15 @@ class SearchViewModel(
     private var historyTrackList =
         readHistoryUseCase.execute().history.takeIf { it.isNotEmpty() } ?: ArrayList<TrackDomain>()
 
-    //
-//    SearchViewState
     private var viewState = MutableLiveData<ScreenInformation>().apply {
-        value?.history = historyTrackList
+        postValue(
+            ScreenInformation(
+                screenState = SearchViewState.Content(
+                    tracks = trackList
+                ),
+                history = historyTrackList
+            )
+        )
     }
 
     fun getViewState(): LiveData<ScreenInformation> = viewState
@@ -60,7 +66,7 @@ class SearchViewModel(
     }
 
     fun search(searchText: String) {
-        viewState.value?.screenState = SearchViewState.Loading
+        viewState.postValue(ScreenInformation(screenState = SearchViewState.Loading, history = historyTrackList))
         val context = contextRef.get()
 
         if (
@@ -95,17 +101,14 @@ class SearchViewModel(
 
                             if (errorMessage != null) {
                                 if (context != null) {
-                                    viewState.value?.screenState =
-                                        SearchViewState.Error(context.getString(R.string.something_went))
+                                    viewState.postValue(ScreenInformation(screenState = SearchViewState.Error(errorMessage = context.getString(R.string.something_went)), history = historyTrackList))
                                 }
                             } else if (trackList.isEmpty() == true) {
                                 if (context != null) {
-                                    viewState.value?.screenState =
-                                        SearchViewState.Empty(context.getString(R.string.nothing_found))
+                                    viewState.postValue(ScreenInformation(screenState = SearchViewState.Empty(message = context.getString(R.string.nothing_found)), history = historyTrackList))
                                 }
                             } else {
-                                viewState.value?.screenState =
-                                    SearchViewState.Content(tracks = trackList)
+                                viewState.postValue(ScreenInformation(screenState = SearchViewState.Content(tracks = trackList), history = historyTrackList))
                             }
                         }
                     }
