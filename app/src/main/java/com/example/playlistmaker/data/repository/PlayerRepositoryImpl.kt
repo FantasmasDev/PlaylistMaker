@@ -2,15 +2,12 @@ package com.example.playlistmaker.data.repository
 
 import android.media.MediaPlayer
 import com.example.playlistmaker.data.mapper.DataMapper
-import com.example.playlistmaker.data.models.PlayerData
 import com.example.playlistmaker.domain.models.CurrentTimeDomainModel
 import com.example.playlistmaker.domain.models.PlayerStateDomain
 import com.example.playlistmaker.domain.models.TrackURLDomainModel
 import com.example.playlistmaker.domain.repository.PlayerRepository
 
-class PlayerRepositoryImpl() : PlayerRepository {
-
-    private lateinit var player: PlayerData
+class PlayerRepositoryImpl(private val player: MediaPlayer) : PlayerRepository {
 
     private var playerState: PlayerStateDomain = PlayerStateDomain.STATE_DEFAULT
 
@@ -22,33 +19,31 @@ class PlayerRepositoryImpl() : PlayerRepository {
             track
         )
 
-        player = PlayerData(MediaPlayer())
-
-        player.player.setDataSource(currentTrack.previewUrl)
-        player.player.prepareAsync()
-        player.player.setOnPreparedListener {
+        player.setDataSource(currentTrack.previewUrl)
+        player.prepareAsync()
+        player.setOnPreparedListener {
             preparedCallBack?.invoke()
 
         }
-        player.player.setOnCompletionListener {
+        player.setOnCompletionListener {
             completionCallBack?.invoke()
         }
     }
 
     override fun pause() {
-        player.player.pause()
+        player.pause()
     }
 
     override fun play() {
-        player.player.start()
+        player.start()
     }
 
     override fun release() {
-        player.player.release()
+        player.release()
     }
 
     override fun getCurrentPosition(): CurrentTimeDomainModel {
-        return CurrentTimeDomainModel(player.player.currentPosition)
+        return CurrentTimeDomainModel(player.currentPosition)
     }
 
     override fun setOnPreparedListener(callback: () -> Unit) {
@@ -68,8 +63,6 @@ class PlayerRepositoryImpl() : PlayerRepository {
     }
 
     override fun isPlaying(): Boolean {
-        return player.player.isPlaying
+        return player.isPlaying
     }
-
-
 }

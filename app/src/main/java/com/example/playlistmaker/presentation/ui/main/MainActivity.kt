@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        vm = ViewModelProvider(this, MainViewModelFactory(this))[MainViewModel::class.java]
         vm.readTheme()
         vm.getViewState().observe(this) {
             (applicationContext as App).switcherTheme(it.currentThemeState.themeState)
