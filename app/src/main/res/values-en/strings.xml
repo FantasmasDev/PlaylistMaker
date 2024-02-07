@@ -10,4 +10,5 @@
     <string name="search_menu_button">Search</string>
     <string name="nothing_found">nothing found</string>
     <string name="place_holder_button">Update</string>
+    <string name="library">Медиатека</string>
 </resources>

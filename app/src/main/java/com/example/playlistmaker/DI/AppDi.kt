@@ -1,6 +1,8 @@
 package com.example.playlistmaker.DI
 
 import com.example.playlistmaker.domain.models.TrackDomain
+import com.example.playlistmaker.presentation.ui.library_activity.LibraryFragmentViewModel
+import com.example.playlistmaker.presentation.ui.library_activity.LibraryViewModel
 import com.example.playlistmaker.presentation.ui.main.MainViewModel
 import com.example.playlistmaker.presentation.ui.player_activity.PlayerViewModel
 import com.example.playlistmaker.presentation.ui.search_activity.SearchViewModel
@@ -18,10 +20,23 @@ val appModule = module {
     }
 
     viewModel<SearchViewModel> {
-        SearchViewModel(tracksInteractor = get(), writeHistoryUseCase = get(), readHistoryUseCase = get(), context = get())
+        SearchViewModel(
+            tracksInteractor = get(),
+            writeHistoryUseCase = get(),
+            readHistoryUseCase = get(),
+            context = get()
+        )
     }
 
-    viewModel<PlayerViewModel>() {(track: TrackDomain) ->
+    viewModel<PlayerViewModel>() { (track: TrackDomain) ->
         PlayerViewModel(playerInteractor = get(), track = track, context = get())
+    }
+
+    viewModel<LibraryViewModel>() {
+        LibraryViewModel()
+    }
+
+    viewModel<LibraryFragmentViewModel>() { (fragmentType: Int) ->
+        LibraryFragmentViewModel(fragmentType = fragmentType)
     }
 }
