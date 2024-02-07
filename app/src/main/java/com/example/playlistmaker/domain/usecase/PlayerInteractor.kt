@@ -6,7 +6,7 @@ import com.example.playlistmaker.domain.models.TrackDomain
 import com.example.playlistmaker.domain.repository.PlayerRepository
 import com.example.playlistmaker.presentation.mapper.TrackMapper
 
-class PlayerEntity(private val playerRepository: PlayerRepository) {
+class PlayerInteractor(private val playerRepository: PlayerRepository) {
 
     fun prepare(track: TrackDomain) {
         playerRepository.prepare(TrackMapper.mapToDomain(track))

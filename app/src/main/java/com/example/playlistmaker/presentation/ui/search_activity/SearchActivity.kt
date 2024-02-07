@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -19,8 +20,10 @@ import com.example.playlistmaker.R
 import com.example.playlistmaker.presentation.ui.search_activity.adapters.TrackAdapter
 import com.example.playlistmaker.databinding.ActivitySearchBinding
 import com.example.playlistmaker.domain.models.TrackDomain
+import com.example.playlistmaker.presentation.ui.main.MainViewModel
 import com.example.playlistmaker.presentation.ui.player_activity.PlayerActivity
 import com.example.playlistmaker.presentation.ui.search_activity.models.SearchViewState
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class SearchActivity : AppCompatActivity() {
@@ -28,7 +31,7 @@ class SearchActivity : AppCompatActivity() {
         private const val CLICK_DEBOUNCE_DELAY = 1000L
     }
 
-    private lateinit var vm: SearchViewModel
+    private val vm by viewModel<SearchViewModel>()
     private lateinit var binding: ActivitySearchBinding
     private var isClickAllowed = true
     private val handler = Handler(Looper.getMainLooper())
@@ -46,8 +49,6 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        vm = ViewModelProvider(this, SearchViewModelFactory(this))[SearchViewModel::class.java]
 
         val recycler = binding.trackList
         val historyRecycler = binding.historyList

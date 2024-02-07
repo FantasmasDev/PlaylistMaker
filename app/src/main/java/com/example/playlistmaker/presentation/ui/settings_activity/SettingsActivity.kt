@@ -5,13 +5,15 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import com.example.playlistmaker.App
+import com.example.playlistmaker.app.App
 import com.example.playlistmaker.R
 import com.example.playlistmaker.databinding.ActivitySettingsBinding
 import com.example.playlistmaker.domain.models.ThemeStateParam
+import com.example.playlistmaker.presentation.ui.main.MainViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsActivity : AppCompatActivity() {
-    private lateinit var vm: SettingsViewModel
+    private val vm by viewModel<SettingsViewModel>()
 
     private lateinit var binding: ActivitySettingsBinding
 
@@ -20,7 +22,6 @@ class SettingsActivity : AppCompatActivity() {
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        vm = ViewModelProvider(this, SettingsViewModelFactory(this))[SettingsViewModel::class.java]
         vm.readTheme()
         vm.getViewState().observe(this) {
             binding.themeSwitcher.isChecked = it.currentThemeState.themeState

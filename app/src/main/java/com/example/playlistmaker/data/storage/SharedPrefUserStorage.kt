@@ -1,19 +1,19 @@
 package com.example.playlistmaker.data.storage
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.example.playlistmaker.data.dto.SavedHistoryOfTracks
 import com.example.playlistmaker.data.dto.TrackDto
 import com.example.playlistmaker.data.models.NightMode
 import com.google.gson.Gson
 
-private const val SHARED_PREFS_NAME = "shared_prefs_name"
 private const val THEME_NIGHT_MODE_STATE = "switch_night_mode_state"
 private const val TRACKS_HISTORY = "tracks_history"
 
-class SharedPrefUserStorage(context: Context) : UserStorage {
-
-    private val sharedPreferences =
-        context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+class SharedPrefUserStorage(
+    private val sharedPreferences: SharedPreferences,
+    private val gson: Gson
+) : UserStorage {
 
     override fun saveTheme(isNightMode: NightMode) {
         sharedPreferences.edit().putBoolean(THEME_NIGHT_MODE_STATE, isNightMode.isEnable).apply()
@@ -26,7 +26,7 @@ class SharedPrefUserStorage(context: Context) : UserStorage {
     }
 
     override fun saveHistory(saveTracks: SavedHistoryOfTracks) {
-        val json = Gson().toJson(saveTracks.tracks)
+        val json = gson.toJson(saveTracks.tracks)
         sharedPreferences.edit().putString(TRACKS_HISTORY, json).apply()
     }
 
@@ -34,7 +34,7 @@ class SharedPrefUserStorage(context: Context) : UserStorage {
         val json = sharedPreferences.getString(TRACKS_HISTORY, null) ?: return SavedHistoryOfTracks(
             ArrayList<TrackDto>()
         )
-        val list = Gson().fromJson(json, Array<TrackDto>::class.java)
+        val list = gson.fromJson(json, Array<TrackDto>::class.java)
         return SavedHistoryOfTracks(tracks = list.toCollection(ArrayList<TrackDto>()))
     }
 }
