@@ -1,4 +1,4 @@
-package com.example.playlistmaker.domain.usecase
+package com.example.playlistmaker.domain.usecase.shared_cases
 
 import com.example.playlistmaker.domain.models.TrackHistory
 import com.example.playlistmaker.domain.repository.SharedRepository

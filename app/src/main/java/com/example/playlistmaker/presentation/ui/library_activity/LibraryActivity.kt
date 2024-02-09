@@ -2,9 +2,9 @@ package com.example.playlistmaker.presentation.ui.library_activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModel
 import com.example.playlistmaker.R
 import com.example.playlistmaker.databinding.ActivityLibraryBinding
+import com.example.playlistmaker.presentation.ui.library_activity.adapters.LibraryViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

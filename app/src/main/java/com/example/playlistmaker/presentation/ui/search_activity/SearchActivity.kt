@@ -155,10 +155,11 @@ class SearchActivity : AppCompatActivity() {
                     if (binding.searchBar.hasFocus() && s?.isEmpty() == true && historyTrackAdapter.tracks.isNotEmpty()
                     ) {
                         binding.historyPlaceHolder.visibility = View.VISIBLE
+                        vm.setEmpty()
                     } else {
                         binding.historyPlaceHolder.visibility = View.GONE
                     }
-                    if (binding.searchBar.text.isNotEmpty()) {
+                    if (!searchBar.text.equals("")) {
                         vm.searchDebounce(binding.searchBar.text.toString())
                     }
                 }

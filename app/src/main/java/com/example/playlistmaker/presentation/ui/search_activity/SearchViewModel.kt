@@ -3,16 +3,15 @@ package com.example.playlistmaker.presentation.ui.search_activity
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.playlistmaker.R
 import com.example.playlistmaker.domain.models.TrackDomain
 import com.example.playlistmaker.domain.models.TrackHistory
-import com.example.playlistmaker.domain.usecase.ReadHistoryUseCase
+import com.example.playlistmaker.domain.usecase.shared_cases.ReadHistoryUseCase
 import com.example.playlistmaker.domain.usecase.TracksInteractor
-import com.example.playlistmaker.domain.usecase.WriteHistoryUseCase
+import com.example.playlistmaker.domain.usecase.shared_cases.WriteHistoryUseCase
 import com.example.playlistmaker.presentation.ui.search_activity.models.ScreenInformation
 import com.example.playlistmaker.presentation.ui.search_activity.models.SearchViewState
 import java.lang.ref.WeakReference
@@ -55,6 +54,10 @@ class SearchViewModel(
         handler.removeCallbacksAndMessages(SEARCH_REQUEST_TOKEN)
         val searchRunnable = Runnable { search(searchText) }
         handler.postDelayed(searchRunnable, SEARCH_REQUEST_TOKEN, SEARCH_DEBOUNCE_DELAY)
+    }
+
+    fun setEmpty(){
+        viewState.postValue(ScreenInformation(screenState = SearchViewState.Content(tracks = ArrayList<TrackDomain>()), history = historyTrackList))
     }
 
     fun handlerClear() {
