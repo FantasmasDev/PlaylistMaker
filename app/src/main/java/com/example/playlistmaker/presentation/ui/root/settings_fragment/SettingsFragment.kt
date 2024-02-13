@@ -18,9 +18,7 @@ class SettingsFragment : Fragment() {
     private val vm by viewModel<SettingsFragmentModel>()
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
-//    private var _binding: FragmentCitiesBinding? = null
-//    // создаём неизменяемую переменную, к которой можно будет обращаться без ?. Мы должны не забыть инициализировать _binding, до того как использовать
-//    private val binding get() = _binding!!
+
     companion object {
         fun newInstance() = SettingsFragment()
     }

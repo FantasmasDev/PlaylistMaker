@@ -135,9 +135,6 @@ class SearchFragment : Fragment() {
 
 
         binding.apply {
-//            goHomeButton.setOnClickListener {
-//                finish()
-//            }
 
             clearButton.setOnClickListener {
                 searchBar.setText("")
@@ -182,7 +179,6 @@ class SearchFragment : Fragment() {
                         progressBar.isVisible = false
                         errorPlaceholder.isVisible = false
                         recycler.isVisible = false
-//                        vm.setEmpty()
                     } else {
                         historyPlaceHolder.isVisible = false
                         recycler.isVisible = true
@@ -192,9 +188,6 @@ class SearchFragment : Fragment() {
                     if (!s.isNullOrEmpty()) {
                         historyPlaceHolder.isVisible = false
 
-//                        handler.removeCallbacksAndMessages(SEARCH_REQUEST_TOKEN)
-//                        val searchRunnable = Runnable{vm.search(searchBar.text.toString())}
-//                        handler.postDelayed(searchRunnable, SEARCH_REQUEST_TOKEN, SEARCH_DEBOUNCE_DELAY)
                         vm.searchDebounce(searchBar.text.toString())
                     }
                 }
@@ -241,14 +234,6 @@ class SearchFragment : Fragment() {
             outState.putString(USER_INPUT, userInput)
     }
 
-
-//Todo
-//    @SuppressLint("NotifyDataSetChanged")
-//    override fun onRestart() {
-//        super.onRestart()
-//        historyTrackAdapter.notifyDataSetChanged()
-//    }
-
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         if(savedInstanceState != null){
@@ -257,11 +242,6 @@ class SearchFragment : Fragment() {
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-//    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-//        super.onRestoreInstanceState(savedInstanceState)
-//
-//    }
 
     private fun clearButtonVisibility(s: CharSequence?): Int {
         return if (s.isNullOrEmpty()) {
@@ -298,7 +278,6 @@ class SearchFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun openPlayer(track: TrackDomain) {
-        //TODO
         if (clickDebounce()) {
             vm.addTrack(track)
             val playerIntent = Intent(requireContext(), PlayerActivity::class.java)

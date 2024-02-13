@@ -43,8 +43,6 @@ class LibraryRootFragment : Fragment() {
         }
 
         tabMediator.attach()
-
-//        binding.menuButton.setOnClickListener { finish() }
     }
 
     override fun onDestroyView() {
