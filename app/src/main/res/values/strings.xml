@@ -1,39 +1,48 @@
 <resources>
     <string name="app_name" translatable="false">Playlist Maker</string>
 
+<!--    rootActivity-->
     <string name="main_header" translatable="false">Playlist Maker</string>
-    <string name="search_button">Поиск</string>
-    <string name="settings_button">Настройки</string>
-    <string name="search_menu_button">Поиск</string>
-    <string name="library_button">Медиатека</string>
-    <string name="dark_theme_switcher">Тёмная тема</string>
-    <string name="share_app">Поделиться приложением</string>
-    <string name="support_button">Написать в поддержку</string>
-    <string name="terms_of_use">Пользовательское соглашение</string>
+    <string name="search_button" translatable="false">Поиск</string>
+    <string name="settings_button" translatable="false">Настройки</string>
+    <string name="search_menu_button" translatable="false">Поиск</string>
+    <string name="library_button" translatable="false">Медиатека</string>
+<!--    searchFragment-->
+    <!--   PlaceHolder-->
+    <string name="nothing_found" translatable="false">Ничего не нашлось</string>
+    <string name="something_went" translatable="false">Проблемы со связью \n \n Загрузка не удалась. Проверьте подключение к интернету</string>
+    <string name="something_went_wrong" translatable="false">Что-то пошло не так</string>
+    <string name="place_holder_button" translatable="false">Обновить</string>
+
+<!--    settingsFragment-->
+    <string name="dark_theme_switcher" translatable="false">Тёмная тема</string>
+    <string name="share_app" translatable="false">Поделиться приложением</string>
+    <string name="support_button" translatable="false">Написать в поддержку</string>
+    <string name="terms_of_use" translatable="false">Пользовательское соглашение</string>
+    <!--    settingsToolsStrings-->
     <string name="link" translatable="false">https://practicum.yandex.ru/android-developer/?from=catalog</string>
     <string name="share_app_link" translatable="false">Поделиться приложением</string>
     <string name="dev_mail" translatable="false">fragofikus@gmail.com</string>
     <string name="mail_theme" translatable="false">Сообщение разработчикам и разработчицам приложения Playlist Maker</string>
     <string name="mail_content" translatable="false">Спасибо разработчикам и разработчицам за крутое приложение!</string>
     <string name="terms_link" translatable="false">https://yandex.ru/legal/practicum_offer/</string>
+
+<!--    libraryFragment-->
+    <string name="library_header" translatable="false">Медиатека</string>
     <string name="library_tracks_tab" translatable="false">Избранные треки</string>
     <string name="playlist_tab" translatable="false">Плейлисты</string>
     <string name="playlist_new_button" translatable="false">Новый плейлист</string>
-
-    <!--   Строки PlaceHolder-->
-    <string name="nothing_found">Ничего не нашлось</string>
-    <string name="something_went" translatable="false">Проблемы со связью \n \n Загрузка не удалась. Проверьте подключение к интернету</string>
-    <string name="something_went_wrong" translatable="false">Что-то пошло не так</string>
     <string name="empty_playlist_list" translatable="false">Вы не создали ни одного плейлиста</string>
     <string name="empty_library" translatable="false">Ваша медиатека пуста</string>
 
-
-    <string name="place_holder_button">Обновить</string>
+<!--    playerActivity-->
     <string name="player_track_default_current_time" translatable="false">00:00</string>
     <string name="player_track_duration" translatable="false">Длительность</string>
     <string name="player_track_album_name" translatable="false">Альбом</string>
     <string name="player_year_info" translatable="false">Год</string>
     <string name="player_genre_info" translatable="false">Жанр</string>
     <string name="player_country_info" translatable="false">Страна</string>
-    <string name="library">Медиатека</string>
+<!--    toolsStrings-->
+
+
 </resources>

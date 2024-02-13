@@ -34,7 +34,7 @@
                 style="@style/TrackSeparator"
                 android:importantForAccessibility="no"
                 android:src="@drawable/point"
-                app:tint="?attr/colorOnPrimarySurface" />
+                app:tint="?attr/point_separator" />
 
             <TextView
                 android:id="@+id/track_time"
@@ -48,5 +48,5 @@
         style="@style/TrackActionButton"
         android:importantForAccessibility="no"
         android:src="@drawable/arrow_forward"
-        app:tint="?attr/colorOnPrimarySurface" />
+        app:tint="?attr/point_separator" />
 </LinearLayout>

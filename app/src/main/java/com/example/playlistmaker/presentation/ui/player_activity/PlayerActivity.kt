@@ -6,15 +6,12 @@ import android.util.TypedValue
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.playlistmaker.R
 import com.example.playlistmaker.databinding.PlayerLayoutBinding
 import com.example.playlistmaker.domain.models.TrackDomain
-import com.example.playlistmaker.presentation.ui.main.MainViewModel
-import com.example.playlistmaker.presentation.ui.settings_activity.SettingsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.text.SimpleDateFormat

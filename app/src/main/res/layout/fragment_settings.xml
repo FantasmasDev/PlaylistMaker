@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/SettingsScreenActivity">
+
+
+    <TextView
+        style="@style/ScreenHeaderText"
+        android:layout_marginBottom="40dp"
+        android:text="@string/settings_button"
+        tools:layout_gravity="bottom" />
+
+
+    <LinearLayout
+        android:id="@+id/setting_dark_theme_button"
+        style="@style/ScreenOption">
+
+
+        <TextView
+            style="@style/ScreenOptionText"
+            android:baselineAligned="false"
+            android:gravity="fill"
+            android:text="@string/dark_theme_switcher" />
+
+        <Switch
+            android:id="@+id/theme_switcher"
+            style="@style/ScreenOptionImage"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sharing_app_button"
+        style="@style/ScreenOption">
+
+        <TextView
+            style="@style/ScreenOptionText"
+            android:text="@string/share_app" />
+
+        <ImageButton
+            style="@style/ScreenOptionImage"
+            android:importantForAccessibility="no"
+            android:src="@drawable/share" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/support_button"
+        style="@style/ScreenOption">
+
+        <TextView
+            style="@style/ScreenOptionText"
+            android:text="@string/support_button" />
+
+        <ImageButton
+            style="@style/ScreenOptionImage"
+            android:importantForAccessibility="no"
+            android:src="@drawable/support" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/terms_of_use_button"
+        style="@style/ScreenOption">
+
+        <TextView
+            style="@style/ScreenOptionText"
+            android:text="@string/terms_of_use" />
+
+        <ImageButton
+            style="@style/ScreenOptionImage"
+            android:importantForAccessibility="no"
+            android:src="@drawable/arrow_forward" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,5 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
+<!--    Base app colors BG n FONTS-->
+    <attr name="prime_color" />
+    <attr name="on_prime_color" />
+    <attr name="search_text_main_color" />
+
+<!--    Shapes-->
+    <attr name="shape_back_ground" />
+    <attr name="on_shape_back_ground" />
+    <attr name="point_separator" />
+
+<!--    Buttons or Draws-->
     <attr name="placeholder_image_not_found" />
     <attr name="placeholder_image_error" />
     <attr name="add_button" />
@@ -8,33 +19,23 @@
     <attr name="pause_button" />
 
     <style name="Main.Screen.Theme" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/main_background_blue</item>
-        <item name="colorOnPrimary">@color/white</item>
+<!--        Colors-->
+        <item name="prime_color">@color/white</item>
+        <item name="on_prime_color">@color/main_font_black</item>
+        <item name="search_text_main_color">@color/dark_gray_background</item>
 
-        <item name="colorSurface">@color/white</item>
-        <item name="colorOnSurface">@color/main_font_black</item>
+<!--        Shapes-->
+        <item name="shape_back_ground">@color/braight_gray_background</item>
+        <item name="on_shape_back_ground">@color/dark_gray_background</item>
+        <item name="point_separator">@color/dark_gray_background</item>
 
-    </style>
-
-    <style name="Second.Screen.Theme" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorOnPrimary">@color/main_font_black</item>
+<!--        Draws-->
         <item name="add_button">@drawable/add_button</item>
         <item name="like_button">@drawable/like_button</item>
         <item name="play_button">@drawable/play_button</item>
         <item name="pause_button">@drawable/pause_button</item>
-    </style>
-
-    <style name="Search.Screen.Theme" parent="Second.Screen.Theme">
-        <item name="colorSurface">@color/braight_gray_background</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <item name="colorOnSurface">@color/main_font_black</item>
-        <item name="colorPrimaryVariant">@color/dark_gray_background</item>
-        <item name="colorOnPrimarySurface">@color/dark_gray_background</item>
         <item name="placeholder_image_not_found">@drawable/placeholder_message_notfound_light</item>
         <item name="placeholder_image_error">@drawable/placeholder_message_error_light</item>
-
     </style>
-
 
 </resources>
