@@ -11,7 +11,6 @@ import com.example.playlistmaker.app.App
 import com.example.playlistmaker.R
 import com.example.playlistmaker.databinding.FragmentSettingsBinding
 import com.example.playlistmaker.domain.models.ThemeStateParam
-import com.example.playlistmaker.presentation.ui.root.search_fragment.SearchFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsFragment : Fragment() {

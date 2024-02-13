@@ -13,6 +13,8 @@
     <string name="something_went" translatable="false">Проблемы со связью \n \n Загрузка не удалась. Проверьте подключение к интернету</string>
     <string name="something_went_wrong" translatable="false">Что-то пошло не так</string>
     <string name="place_holder_button" translatable="false">Обновить</string>
+    <string name="place_notification_text" translatable="false">Вы искали</string>
+    <string name="clean_history_button" translatable="false">Очистить историю</string>
 
 <!--    settingsFragment-->
     <string name="dark_theme_switcher" translatable="false">Тёмная тема</string>

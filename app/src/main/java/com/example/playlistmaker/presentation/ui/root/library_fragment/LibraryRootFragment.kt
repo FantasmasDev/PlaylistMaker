@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.example.playlistmaker.R
 import com.example.playlistmaker.databinding.FragmentLibraryRootBinding
 import com.example.playlistmaker.presentation.ui.root.library_fragment.adapters.LibraryViewPagerAdapter
-import com.example.playlistmaker.presentation.ui.root.settings_fragment.SettingsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

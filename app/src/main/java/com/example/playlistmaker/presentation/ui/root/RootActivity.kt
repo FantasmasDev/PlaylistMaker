@@ -1,15 +1,12 @@
 package com.example.playlistmaker.presentation.ui.root
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.commit
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.playlistmaker.R
 import com.example.playlistmaker.app.App
 import com.example.playlistmaker.databinding.ActivityRootBinding
-import com.example.playlistmaker.presentation.ui.root.library_fragment.LibraryRootFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RootActivity : AppCompatActivity() {

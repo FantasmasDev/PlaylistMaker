@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.playlistmaker.R
 import com.example.playlistmaker.presentation.ui.root.search_fragment.adapters.TrackAdapter
 import com.example.playlistmaker.databinding.FragmentSearchBinding
-import com.example.playlistmaker.databinding.FragmentSettingsBinding
 import com.example.playlistmaker.domain.models.TrackDomain
 import com.example.playlistmaker.presentation.ui.player_activity.PlayerActivity
 import com.example.playlistmaker.presentation.ui.root.search_fragment.models.SearchFragmentState
