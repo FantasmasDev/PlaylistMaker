@@ -20,10 +20,4 @@
         <item name="placeholder_image_error">@drawable/placeholder_message_error_dark</item>
     </style>
 
-<!--    <style name="Search.Screen.Theme" parent="Main.Screen.Theme">-->
-<!--        <item name="colorOnSecondary">@color/white</item>-->
-<!--        <item name="colorPrimaryVariant">@color/main_font_black</item>-->
-<!--        <item name="colorOnPrimarySurface">@color/white</item>-->
-
-<!--    </style>-->
 </resources>
