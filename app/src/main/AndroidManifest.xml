@@ -26,7 +26,8 @@
             android:theme="@style/Search.Screen.Theme" />
         <activity
             android:name=".presentation.ui.library_activity.LibraryActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Search.Screen.Theme"/>
         <activity
             android:name=".presentation.ui.settings_activity.SettingsActivity"
             android:exported="false"
