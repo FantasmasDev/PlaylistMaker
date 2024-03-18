@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/libraryRootFragment">
+
+    <activity
+        android:id="@+id/rootActivity"
+        android:name="com.example.playlistmaker.presentation.ui.root.RootActivity"
+        android:label="RootActivity" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.playlistmaker.presentation.ui.root.search_fragment.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search"/>
+    <fragment
+        android:id="@+id/libraryRootFragment"
+        android:name="com.example.playlistmaker.presentation.ui.root.library_fragment.LibraryRootFragment"
+        android:label="LibraryRootFragment"
+        tools:layout="@layout/fragment_library_root">
+        <action
+            android:id="@+id/action_libraryRootFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment" />
+        <action
+            android:id="@+id/action_libraryRootFragment_to_playListLibraryFragment"
+            app:destination="@id/playListLibraryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.playlistmaker.presentation.ui.root.settings_fragment.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings"/>
+    <activity
+        android:id="@+id/playerActivity"
+        android:name="com.example.playlistmaker.presentation.ui.player_activity.PlayerActivity"
+        android:label="PlayerActivity" />
+    <fragment
+        android:id="@+id/playListLibraryFragment"
+        android:name="com.example.playlistmaker.presentation.ui.root.library_fragment.fragments.playlist_fragment.PlayListLibraryFragment"
+        android:label="PlayListLibraryFragment"
+        tools:layout="@layout/fragment_playlist_library"/>
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="com.example.playlistmaker.presentation.ui.root.library_fragment.fragments.library_fragment.LibraryFragment"
+        android:label="LibraryFragment"
+        tools:layout="@layout/fragment_library"/>
+</navigation>

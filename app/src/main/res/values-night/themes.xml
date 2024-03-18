@@ -1,29 +1,23 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
     <style name="Main.Screen.Theme" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/main_background_black</item>
-        <item name="colorOnPrimary">@color/white</item>
+<!--        Colors-->
+        <item name="prime_color">@color/main_background_black</item>
+        <item name="on_prime_color">@color/white</item>
+        <item name="search_text_main_color">@color/white</item>
 
-        <item name="colorSurface">@color/white</item>
-        <item name="colorOnSurface">@color/main_font_black</item>
-    </style>
+<!--        Shapes-->
+        <item name="shape_back_ground">@color/white</item>
+        <item name="on_shape_back_ground">@color/black</item>
+        <item name="point_separator">@color/white</item>
 
-    <style name="Second.Screen.Theme" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/main_background_black</item>
-        <item name="colorOnPrimary">@color/white</item>
+<!--        Draws-->
         <item name="add_button">@drawable/add_button_night</item>
         <item name="like_button">@drawable/like_button_night</item>
         <item name="play_button">@drawable/play_button_dark</item>
         <item name="pause_button">@drawable/pause_button_dark</item>
-    </style>
-
-    <style name="Search.Screen.Theme" parent="Second.Screen.Theme">
-        <item name="colorSurface">@color/white</item>
-        <item name="colorOnSecondary">@color/white</item>
-        <item name="colorOnSurface">@color/black</item>
-        <item name="colorPrimaryVariant">@color/main_font_black</item>
-        <item name="colorOnPrimarySurface">@color/white</item>
         <item name="placeholder_image_not_found">@drawable/placeholder_message_notfound_dark</item>
         <item name="placeholder_image_error">@drawable/placeholder_message_error_dark</item>
     </style>
+
 </resources>

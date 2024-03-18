@@ -1,27 +1,27 @@
 package com.example.playlistmaker.DI
 
 import com.example.playlistmaker.domain.models.TrackDomain
-import com.example.playlistmaker.presentation.ui.library_activity.fragments.library_fragment.LibraryFragmentViewModel
-import com.example.playlistmaker.presentation.ui.library_activity.LibraryViewModel
-import com.example.playlistmaker.presentation.ui.library_activity.fragments.playlist_fragment.PlayListLibraryFragmentViewModel
-import com.example.playlistmaker.presentation.ui.main.MainViewModel
+import com.example.playlistmaker.presentation.ui.root.library_fragment.fragments.library_fragment.LibraryFragmentViewModel
+import com.example.playlistmaker.presentation.ui.root.library_fragment.LibraryRootFragmentModel
+import com.example.playlistmaker.presentation.ui.root.library_fragment.fragments.playlist_fragment.PlayListLibraryFragmentViewModel
+import com.example.playlistmaker.presentation.ui.root.RootViewModel
 import com.example.playlistmaker.presentation.ui.player_activity.PlayerViewModel
-import com.example.playlistmaker.presentation.ui.search_activity.SearchViewModel
-import com.example.playlistmaker.presentation.ui.settings_activity.SettingsViewModel
+import com.example.playlistmaker.presentation.ui.root.search_fragment.SearchFragmentModel
+import com.example.playlistmaker.presentation.ui.root.settings_fragment.SettingsFragmentModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
-    viewModel<MainViewModel> {
-        MainViewModel(readThemeUseCase = get())
+    viewModel<RootViewModel> {
+        RootViewModel(readThemeUseCase = get())
     }
 
-    viewModel<SettingsViewModel> {
-        SettingsViewModel(readThemeUseCase = get(), writeThemeUseCase = get())
+    viewModel<SettingsFragmentModel> {
+        SettingsFragmentModel(readThemeUseCase = get(), writeThemeUseCase = get())
     }
 
-    viewModel<SearchViewModel> {
-        SearchViewModel(
+    viewModel<SearchFragmentModel> {
+        SearchFragmentModel(
             tracksInteractor = get(),
             writeHistoryUseCase = get(),
             readHistoryUseCase = get(),
@@ -33,8 +33,8 @@ val appModule = module {
         PlayerViewModel(playerInteractor = get(), track = track, context = get())
     }
 
-    viewModel<LibraryViewModel>() {
-        LibraryViewModel()
+    viewModel<LibraryRootFragmentModel>() {
+        LibraryRootFragmentModel()
     }
 
     viewModel<LibraryFragmentViewModel>() {

@@ -19,22 +19,12 @@
         <activity
             android:name=".presentation.ui.player_activity.PlayerActivity"
             android:exported="false"
-            android:theme="@style/Second.Screen.Theme"/>
+            android:theme="@style/Main.Screen.Theme" />
         <activity
-            android:name=".presentation.ui.search_activity.SearchActivity"
-            android:exported="false"
-            android:theme="@style/Search.Screen.Theme" />
-        <activity
-            android:name=".presentation.ui.library_activity.LibraryActivity"
-            android:exported="false"
-            android:theme="@style/Search.Screen.Theme"/>
-        <activity
-            android:name=".presentation.ui.settings_activity.SettingsActivity"
-            android:exported="false"
-            android:theme="@style/Second.Screen.Theme" />
-        <activity
-            android:name=".presentation.ui.main.MainActivity"
-            android:exported="true">
+            android:name=".presentation.ui.root.RootActivity"
+            android:exported="true"
+            android:theme="@style/Main.Screen.Theme"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
