@@ -16,6 +16,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.playlistmaker.R
 import com.example.playlistmaker.presentation.ui.root.search_fragment.adapters.TrackAdapter
@@ -23,6 +24,8 @@ import com.example.playlistmaker.databinding.FragmentSearchBinding
 import com.example.playlistmaker.domain.models.TrackDomain
 import com.example.playlistmaker.presentation.ui.player_activity.PlayerActivity
 import com.example.playlistmaker.presentation.ui.root.search_fragment.models.SearchFragmentState
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -30,11 +33,6 @@ class SearchFragment : Fragment() {
     companion object {
         private const val CLICK_DEBOUNCE_DELAY = 1000L
         private const val USER_INPUT = "user_input"
-
-        private const val SEARCH_DEBOUNCE_DELAY = 2000L
-        private val SEARCH_REQUEST_TOKEN = Any()
-
-        fun newInstance() = SearchFragment()
     }
 
     private val vm by viewModel<SearchFragmentModel>()
@@ -42,7 +40,6 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var isClickAllowed = true
-    private val handler = Handler(Looper.getMainLooper())
     private var userInput =""
 
 
@@ -223,11 +220,6 @@ class SearchFragment : Fragment() {
         vm.writeHistory()
     }
 
-    override fun onDestroyView() {
-        vm.handlerClear()
-        super.onDestroyView()
-    }
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
             outState.putString(USER_INPUT, userInput)
@@ -290,7 +282,10 @@ class SearchFragment : Fragment() {
         val current = isClickAllowed
         if (isClickAllowed) {
             isClickAllowed = false
-            handler.postDelayed({ isClickAllowed = true }, CLICK_DEBOUNCE_DELAY)
+            viewLifecycleOwner.lifecycleScope.launch {
+                delay(CLICK_DEBOUNCE_DELAY)
+                isClickAllowed = true
+            }
         }
         return current
     }

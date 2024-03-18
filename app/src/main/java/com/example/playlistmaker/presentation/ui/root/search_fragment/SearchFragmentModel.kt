@@ -6,6 +6,7 @@ import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.playlistmaker.R
 import com.example.playlistmaker.domain.models.TrackDomain
 import com.example.playlistmaker.domain.models.TrackHistory
@@ -14,6 +15,9 @@ import com.example.playlistmaker.domain.usecase.TracksInteractor
 import com.example.playlistmaker.domain.usecase.shared_cases.WriteHistoryUseCase
 import com.example.playlistmaker.presentation.ui.root.search_fragment.models.ScreenInformation
 import com.example.playlistmaker.presentation.ui.root.search_fragment.models.SearchFragmentState
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 
 class SearchFragmentModel(
@@ -28,6 +32,9 @@ class SearchFragmentModel(
     private var historyTrackList =
         readHistoryUseCase.execute().history.takeIf { it.isNotEmpty() } ?: ArrayList<TrackDomain>()
 
+    private var searchJob: Job? = null
+    private var latestSearchText: String? = null
+
     private var viewState = MutableLiveData<ScreenInformation>().apply {
         postValue(
             ScreenInformation(
@@ -41,28 +48,25 @@ class SearchFragmentModel(
 
     fun getViewState(): LiveData<ScreenInformation> = viewState
 
-
-    private val handler = Handler(Looper.getMainLooper())
-
     companion object {
         private const val SEARCH_DEBOUNCE_DELAY = 2000L
-
-        private val SEARCH_REQUEST_TOKEN = Any()
     }
 
     fun searchDebounce(searchText: String) {
-        handler.removeCallbacksAndMessages(SEARCH_REQUEST_TOKEN)
-        val searchRunnable = Runnable { search(searchText) }
-        handler.postDelayed(searchRunnable, SEARCH_REQUEST_TOKEN, SEARCH_DEBOUNCE_DELAY)
+        if (latestSearchText == searchText) {
+            return
+        }
+
+        latestSearchText = searchText
+
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
+            delay(SEARCH_DEBOUNCE_DELAY)
+            search(searchText)
+        }
     }
 
-    fun setEmpty(){
-        viewState.postValue(ScreenInformation(screenState = SearchFragmentState.Content(tracks = ArrayList<TrackDomain>()), history = historyTrackList))
-    }
 
-    fun handlerClear() {
-        handler.removeCallbacksAndMessages(SEARCH_REQUEST_TOKEN)
-    }
 
     fun clearTrackList() {
         trackList.clear()
@@ -75,47 +79,40 @@ class SearchFragmentModel(
         if (
             searchText.isNotEmpty()
         ) {
-            tracksInteractor.searchTracks(
-                searchText,
-                object : TracksInteractor.TracksConsumer {
-                    override fun consume(
-                        foundTracks: ArrayList<TrackDomain>?,
-                        errorMessage: String?
-                    ) {
-                        handler.post {
+            viewModelScope.launch {
+                tracksInteractor.searchTracks(searchText)
+                    .collect{ pair ->
+                        clearTrackList()
 
-                            clearTrackList()
+                        if (pair.first != null) {
+                            trackList.addAll(pair.first!!.map {
+                                TrackDomain(
+                                    trackName = it.trackName,
+                                    artistName = it.artistName,
+                                    trackTimeMillis = it.trackTimeMillis,
+                                    artworkUrl100 = it.artworkUrl100,
+                                    collectionName = it.collectionName,
+                                    releaseDate = it.releaseDate,
+                                    primaryGenreName = it.primaryGenreName,
+                                    country = it.country,
+                                    previewUrl = it.previewUrl
+                                )
+                            } as ArrayList<TrackDomain>)
+                        }
 
-                            if (foundTracks != null) {
-                                trackList.addAll(foundTracks.map {
-                                    TrackDomain(
-                                        trackName = it.trackName,
-                                        artistName = it.artistName,
-                                        trackTimeMillis = it.trackTimeMillis,
-                                        artworkUrl100 = it.artworkUrl100,
-                                        collectionName = it.collectionName,
-                                        releaseDate = it.releaseDate,
-                                        primaryGenreName = it.primaryGenreName,
-                                        country = it.country,
-                                        previewUrl = it.previewUrl
-                                    )
-                                } as ArrayList<TrackDomain>)
+                        if (pair.second != null) {
+                            if (context != null) {
+                                viewState.postValue(ScreenInformation(screenState = SearchFragmentState.Error(errorMessage = context.getString(R.string.something_went)), history = historyTrackList))
                             }
-
-                            if (errorMessage != null) {
-                                if (context != null) {
-                                    viewState.postValue(ScreenInformation(screenState = SearchFragmentState.Error(errorMessage = context.getString(R.string.something_went)), history = historyTrackList))
-                                }
-                            } else if (trackList.isEmpty() == true) {
-                                if (context != null) {
-                                    viewState.postValue(ScreenInformation(screenState = SearchFragmentState.Empty(message = context.getString(R.string.nothing_found)), history = historyTrackList))
-                                }
-                            } else {
-                                viewState.postValue(ScreenInformation(screenState = SearchFragmentState.Content(tracks = trackList), history = historyTrackList))
+                        } else if (trackList.isEmpty() == true) {
+                            if (context != null) {
+                                viewState.postValue(ScreenInformation(screenState = SearchFragmentState.Empty(message = context.getString(R.string.nothing_found)), history = historyTrackList))
                             }
+                        } else {
+                            viewState.postValue(ScreenInformation(screenState = SearchFragmentState.Content(tracks = trackList), history = historyTrackList))
                         }
                     }
-                })
+            }
         } else {
             clearTrackList()
         }

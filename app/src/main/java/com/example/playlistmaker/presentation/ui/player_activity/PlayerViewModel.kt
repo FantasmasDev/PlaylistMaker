@@ -6,12 +6,16 @@ import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.playlistmaker.R
 import com.example.playlistmaker.domain.models.PlayerStateDomain
 import com.example.playlistmaker.domain.models.TrackDomain
 import com.example.playlistmaker.domain.usecase.PlayerInteractor
 import com.example.playlistmaker.presentation.mapper.TrackMapper
 import com.example.playlistmaker.presentation.ui.player_activity.models.PlayerViewState
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -28,10 +32,9 @@ class PlayerViewModel(
     }
 
     val handler = Handler(Looper.getMainLooper())
+    private var timerJob: Job? = null
 
     private val defTime = context.getString(R.string.player_track_default_current_time)
-
-    private var timerRunnable: Runnable? = null
 
     private var viewState: MutableLiveData<PlayerViewState> =
         MutableLiveData<PlayerViewState>().apply {
@@ -52,7 +55,7 @@ class PlayerViewModel(
 
     private fun completionListener() {
         playerInteractor.setState(PlayerStateDomain.STATE_PREPARED)
-        resetTimer()
+        timerJob?.cancel()
         viewState.postValue(PlayerViewState(false, defTime))
     }
 
@@ -64,7 +67,7 @@ class PlayerViewModel(
     }
 
     fun pausePlayer() {
-        resetTimer()
+        timerJob?.cancel()
         playerInteractor.pause()
         viewState.postValue(viewState.value?.let { PlayerViewState(false, it.currentTime) })
         playerInteractor.setState(PlayerStateDomain.STATE_PAUSED)
@@ -89,41 +92,23 @@ class PlayerViewModel(
     }
 
     private fun updateTimer() {
-        if (
-            playerInteractor.isPlaying()
-            && playerInteractor.getCurrentState() == PlayerStateDomain.STATE_PLAYING
-        ) {
-            timerRunnable = object : Runnable {
-                override fun run() {
-                    viewState.postValue(viewState.value?.let {
-                        PlayerViewState(
-                            it.isPlaying, SimpleDateFormat(
-                                "mm:ss",
-                                Locale.getDefault()
-                            ).format(
-                                TrackMapper.mapToCurrentTimePresentationModel(playerInteractor.getCurrentPosition()).time
-                            )
+        timerJob = viewModelScope.launch {
+            while (playerInteractor.isPlaying()) {
+                delay(THIRD_OF_SECOND)
+                viewState.postValue(viewState.value?.let {
+                    PlayerViewState(
+                        it.isPlaying, SimpleDateFormat(
+                            "mm:ss",
+                            Locale.getDefault()
+                        ).format(
+                            TrackMapper.mapToCurrentTimePresentationModel(playerInteractor.getCurrentPosition()).time
                         )
-                    })
-                    handler.postDelayed(this, THIRD_OF_SECOND)
-                }
+                    )
+                })
             }
-            handler.post(timerRunnable!!)
         }
     }
 
-    fun resetTimer() {
-        if (timerRunnable != null && (playerInteractor.getCurrentState() == PlayerStateDomain.STATE_PAUSED
-                    ||
-                    playerInteractor.getCurrentState() == PlayerStateDomain.STATE_PREPARED
-                    ) &&
-
-            !playerInteractor.isPlaying()
-        ) {
-            handler.removeCallbacksAndMessages(null)
-            timerRunnable = null
-        }
-    }
 
     fun release() {
         playerInteractor.release()

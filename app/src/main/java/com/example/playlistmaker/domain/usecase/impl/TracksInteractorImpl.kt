@@ -1,23 +1,26 @@
 package com.example.playlistmaker.domain.usecase.impl
-
+import com.example.playlistmaker.domain.models.TrackDomain
 import com.example.playlistmaker.domain.repository.TrackRepository
 import com.example.playlistmaker.domain.usecase.TracksInteractor
 import com.example.playlistmaker.util.Resource
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+
 
 class TracksInteractorImpl(private val repository: TrackRepository) : TracksInteractor {
 
-    override fun searchTracks(expression: String, consumer: TracksInteractor.TracksConsumer) {
-        val t = Thread {
-            when (val resource = repository.searchTracks(expression)) {
+    override fun searchTracks(expression: String): Flow<Pair<ArrayList<TrackDomain>?, String?>> {
+
+        return repository.searchTracks(expression).map { result ->
+            when (result) {
                 is Resource.Success -> {
-                    consumer.consume(resource.data, null)
+                    Pair(result.data, null)
                 }
 
                 is Resource.Error -> {
-                    consumer.consume(null, resource.message)
+                    Pair(null, result.message)
                 }
             }
         }
-        t.start()
     }
 }
