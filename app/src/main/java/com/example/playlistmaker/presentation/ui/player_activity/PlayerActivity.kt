@@ -81,7 +81,7 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        vm.resetTimer()
+//        vm.resetTimer()
         vm.release()
         super.onDestroy()
     }
