@@ -28,7 +28,7 @@ class PlayerViewModel(
     companion object {
         private const val SECOND = 1000L
         private const val HALF_SECOND = 500L
-        private const val THIRD_OF_SECOND = 333L
+        private const val THIRD_OF_SECOND = 300L
     }
 
     val handler = Handler(Looper.getMainLooper())

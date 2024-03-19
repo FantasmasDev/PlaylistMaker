@@ -53,8 +53,10 @@ class SearchFragmentModel(
     }
 
     fun searchDebounce(searchText: String) {
-        if (latestSearchText == searchText) {
-            return
+        if (viewState.value?.screenState !is SearchFragmentState.Error) {
+            if (latestSearchText == searchText) {
+                return
+            }
         }
 
         latestSearchText = searchText
@@ -67,13 +69,17 @@ class SearchFragmentModel(
     }
 
 
-
     fun clearTrackList() {
         trackList.clear()
     }
 
     fun search(searchText: String) {
-        viewState.postValue(ScreenInformation(screenState = SearchFragmentState.Loading, history = historyTrackList))
+        viewState.postValue(
+            ScreenInformation(
+                screenState = SearchFragmentState.Loading,
+                history = historyTrackList
+            )
+        )
         val context = contextRef.get()
 
         if (
@@ -81,7 +87,7 @@ class SearchFragmentModel(
         ) {
             viewModelScope.launch {
                 tracksInteractor.searchTracks(searchText)
-                    .collect{ pair ->
+                    .collect { pair ->
                         clearTrackList()
 
                         if (pair.first != null) {
@@ -102,14 +108,32 @@ class SearchFragmentModel(
 
                         if (pair.second != null) {
                             if (context != null) {
-                                viewState.postValue(ScreenInformation(screenState = SearchFragmentState.Error(errorMessage = context.getString(R.string.something_went)), history = historyTrackList))
+                                viewState.postValue(
+                                    ScreenInformation(
+                                        screenState = SearchFragmentState.Error(
+                                            errorMessage = context.getString(R.string.something_went)
+                                        ), history = historyTrackList
+                                    )
+                                )
                             }
                         } else if (trackList.isEmpty() == true) {
                             if (context != null) {
-                                viewState.postValue(ScreenInformation(screenState = SearchFragmentState.Empty(message = context.getString(R.string.nothing_found)), history = historyTrackList))
+                                viewState.postValue(
+                                    ScreenInformation(
+                                        screenState = SearchFragmentState.Empty(
+                                            message = context.getString(R.string.nothing_found)
+                                        ), history = historyTrackList
+                                    )
+                                )
                             }
                         } else {
-                            viewState.postValue(ScreenInformation(screenState = SearchFragmentState.Content(tracks = trackList), history = historyTrackList))
+                            viewState.postValue(
+                                ScreenInformation(
+                                    screenState = SearchFragmentState.Content(
+                                        tracks = trackList
+                                    ), history = historyTrackList
+                                )
+                            )
                         }
                     }
             }

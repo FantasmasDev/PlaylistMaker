@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -146,7 +147,8 @@ class SearchFragment : Fragment() {
             }
 
             placeholderButton.setOnClickListener {
-                vm.search(binding.searchBar.text.toString())
+                Log.e("butt", "pressed")
+                vm.searchDebounce(binding.searchBar.text.toString())
             }
 
             cleanHistoryButton.setOnClickListener {
