@@ -92,6 +92,7 @@
                 android:layout_marginBottom="24dp"
                 android:backgroundTint="?attr/on_prime_color"
                 android:fontFamily="@font/ys_display_medium"
+                android:text="@string/place_holder_button"
                 android:textColor="?attr/prime_color"
                 android:textSize="14sp" />
         </LinearLayout>
